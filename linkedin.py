@@ -16,10 +16,14 @@ class LikenBot():
         sleep(1)
 
         email_in = self.driver.find_element_by_xpath('//*[@id="username"]')
-        email_in.send_keys('bensaid.lucas@gmail.com')
+        with open('user_name.txt', 'r') as email_file:
+            email = email_file.readline().strip()
+        email_in.send_keys(email)
 
         pw_in = self.driver.find_element_by_xpath('//*[@id="password"]')
-        pw_in.send_keys('261194')
+        with open('password.txt', 'r') as pass_file:
+            password = pass_file.readline().strip()
+        pw_in.send_keys(password)
 
         login_btn_2 = self.driver.find_element_by_xpath('//*[@id="app__container"]/main/div[2]/form/div[3]/button')
         login_btn_2.click()

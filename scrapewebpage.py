@@ -40,7 +40,7 @@ class WebPage:
     EXPERIENCE_LOC = '//*[@id = "experience-section"]'
     EDUCATION_LOC = '//*[@id = "education-section"]'
     SKILLS_LOC = '//*[@id="ember585"]/ol'
-    #'//ol[@class="pv-skill-categories-section__top-skills pv-profile-section__section-info section-info pb1")]'
+    # '//ol[@class="pv-skill-categories-section__top-skills pv-profile-section__section-info section-info pb1")]'
 
     EXPERIENCE_XPATH = ''.join([EXPERIENCE_LOC, r"//ul//li"])
     EDUCATION_XPATH = ''.join([EDUCATION_LOC, r"//ul//li"])
@@ -60,41 +60,42 @@ class WebPage:
             raise ValueError("You asked for a LinkedIn section that we cannot scrape.")
         self.output_file = output_file
 
-        #Initialize data to
+        # Initialize data to
         self.scraped_data = {}
+        self.scraped_data[self.url] = {}
         self.driver = my_driver
-
-=
 
     def get_data(self):
         """First, scrolls through the page to make sure it is loaded
         Then, scrapes data for all sections in self.section_list"""
         self.driver.get(self.url)
-        #self.driver.execute_script("document.body.style.zoom='10%'")
+        # self.driver.execute_script("document.body.style.zoom='50%'")
+        self.driver.execute_script("window.scrollTo(0, (document.body.scrollHeight/4));")
+        sleep(self.SCROLL_PAUSE_TIME)
         self.driver.execute_script("window.scrollTo(0, (document.body.scrollHeight/2));")
         sleep(self.SCROLL_PAUSE_TIME)
-        self.driver.execute_script("window.scrollTo(0, (document.body.scrollHeight));")
-
+        self.driver.execute_script("window.scrollTo(0, (3*document.body.scrollHeight/4));")
         if "Experience" in self.section_list:
             ActionChains(self.driver).move_to_element(
                 self.driver.find_element_by_xpath(self.EXPERIENCE_LOC)).perform()
             experience = self.driver.find_elements_by_xpath(self.EXPERIENCE_XPATH)
-            self.scraped_data["Experience"] = self._parse_experience(experience)
+            self.scraped_data[self.url].update({"Experience": self._parse_experience(experience)})
 
         if "Education" in self.section_list:
             ActionChains(self.driver).move_to_element(
                 self.driver.find_element_by_xpath(self.EDUCATION_LOC)).perform()
             education = self.driver.find_elements_by_xpath(self.EDUCATION_XPATH)
-            self.scraped_data["Education"] = self._parse_education(education)
+            self.scraped_data[self.url].update({"Education": self._parse_education(education)})
 
         if "Skills" in self.section_list:
             ActionChains(self.driver).move_to_element(
                 self.driver.find_element_by_xpath(self.SKILLS_LOC)).perform()
             skills = self.driver.find_elements_by_xpath(self.SKILLS_XPATH)
-            self.scraped_data["Skills"] = self._parse_skills(skills)
+            self.scraped_data[self.url].update({"Skills": self._parse_skills(skills)})
+
         if "Featured" in self.section_list:
             featured = self.driver.find_elements_by_xpath(self.FEATURED_XPATH)
-            self.scraped_data["Featured"] = self._parse_featured(featured)
+            self.scraped_data[self.url].update({"Featured": self._parse_featured(featured)})
         self.driver.close()
 
     def _parse_experience(self, experience):
@@ -142,7 +143,7 @@ class WebPage:
     def export_json(self, out_name):
         """Exports the scraped data from the web page as a json file"""
         with open(out_name + '.json', 'w') as json_dump:
-            json.dump(self.scraped_data,json_dump)
+            json.dump(self.scraped_data, json_dump)
 
     def print_data(self):
         """pprints the scraped data from the web page"""

@@ -2,6 +2,10 @@ from selenium import webdriver
 from time import sleep
 import json
 import pprint
+from bs4 import BeautifulSoup
+
+from selenium.webdriver.common.action_chains import ActionChains
+
 
 class WebPage:
     """Represents a LinkedIn webpage.
@@ -26,13 +30,17 @@ class WebPage:
 
 
     """
-    DEFAULT_SECTIONS = {"Experience", "Education"}
+    DEFAULT_SECTIONS = {"Skills","Experience", "Education"}
 
     ALL_SECTIONS = {"Experience", "Education", "Skills", "Featured"}
     EXPERIENCE_FIELDS = {'Company Name', 'Dates Employed', 'Employment Duration', 'Location'}
     EDUCATION_FIELDS = {'Degree Name', 'Field Of Study', "Dates attended or expected graduation"}
     FIELDS = EXPERIENCE_FIELDS.union(EDUCATION_FIELDS)
-    SCROLL_PAUSE_TIME = 1
+
+    # XPATH elements for each section
+    EXPERIENCE_XPATH = '//*[@id = "experience-section"]//ul//li'
+    EDUCATION_XPATH = '//*[@id = "education-section"]//ul//li'
+    SKILLS_XPATH= r'//*[contains(class,"pv-skills-categories-section")]//ol'
 
     def __init__(self, url_loc, my_driver, section_list=None):
         """Initializes the WebPage class. Accepts a url for the page and an optional section list.
@@ -52,29 +60,34 @@ class WebPage:
         """First, scrolls through the page to make sure it is loaded
         Then, scrapes data for all sections in self.section_list"""
         self.driver.get(self.url_loc)
-        self._scroll_page()
+        self.driver.execute_script("document.body.style.zoom='10%'")
+        self.driver.execute_script("window.scrollTo(0, (document.body.scrollHeight/2));")
+        # sleep(self.SCROLL_PAUSE_TIME)
+        #
 
         if "Experience" in self.section_list:
-            experience = self.driver.find_elements_by_xpath('//*[@id = "experience-section"]//ul//li')
+            experience = self.driver.find_elements_by_xpath(self.EXPERIENCE_XPATH)
             self.scraped_data["Experience"] = self._parse_experience(experience)
 
         if "Education" in self.section_list:
-            education = self.driver.find_elements_by_xpath('//*[@id = "education-section"]//ul//li')
+            education = self.driver.find_elements_by_xpath(self.EDUCATION_XPATH)
             self.scraped_data["Education"] = self._parse_education(education)
+        self.driver.execute_script("window.scrollTo(0, (document.body.scrollHeight));")
         if "Skills" in self.section_list:
-            skills = self.driver.find_elements_by_xpath
+            skills = self.driver.find_elements_by_xpath(self.SKILLS_XPATH)
             self.scraped_data["Skills"] = self._parse_skills(skills)
         if "Featured" in self.section_list:
-            featured = self.driver.find_elements_by_xpath
+            featured = self.driver.find_elements_by_xpath(self.FEATURED_XPATH)
             self.scraped_data["Featured"] = self._parse_featured(featured)
         self.driver.close()
 
-    def _scroll_page(self):
+    def _parse_experiencenew(self, experience):
+        """Parses the experience section using the raw scraped data. Records the number of jobs
+        and then produces an array containing the EXPERIENCE_FIELDS for each job"""
+        new_experience = BeautifulSoup(experience, 'html.parser')
 
-        self.driver.execute_script("document.body.style.zoom='10%'")
-        self.driver.execute_script("window.scrollTo(0, (document.body.scrollHeight/2));")
-        sleep(SCROLL_PAUSE_TIME)
-        self.driver.execute_script("window.scrollTo(0, (document.body.scrollHeight));")
+        print(new_experience)
+        return new_experience
 
     def _parse_experience(self, experience):
         """Parses the experience section using the raw scraped data. Records the number of jobs
@@ -82,9 +95,10 @@ class WebPage:
         experience_dict = {}
         experience_dict.update({"Number": len(experience)})
         experience_list = []
+
         for job in experience:
             job_fields = job.text.split('\n')
-            print(job_fields)
+
             experience_list.append(self.create_dictionary_from_pairs(job_fields))
 
         experience_dict.update({"Job_list": experience_list})
@@ -103,16 +117,22 @@ class WebPage:
         education_dict.update({"University_List": education_list})
         return education_dict
 
-    def _parse_featured(featured, self):
+    def _parse_featured( self,featured):
         """Parses the featured section using the raw scraped data.
         Returns the number of items in the section as a key:value pair"""
 
         pass
 
-    def _parse_skills(skills, self):
+    def _parse_skills(self,skills):
         """Parses the skills section using the raw scraped data.
         Records the number of skills and dictionary of the form  skill: number of endorsements"""
-        pass
+        skills_dict = {}
+        for item in skills:
+            print(item)
+            result=item.text.split('\n')
+            print(result)
+            skills_dict.update({result[0]: result[1]})
+        return skills_dict
 
     def export_json(self, out_name):
         """Exports the scraped data from the web page as a json file"""

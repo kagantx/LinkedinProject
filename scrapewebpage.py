@@ -1,8 +1,6 @@
-from selenium import webdriver
 from time import sleep
 import json
 import pprint
-from bs4 import BeautifulSoup
 
 from selenium.webdriver.common.action_chains import ActionChains
 
@@ -39,7 +37,7 @@ class WebPage:
     # XPATH locations for each section (loc) and its fields (xpath)
     EXPERIENCE_LOC = '//*[@id = "experience-section"]'
     EDUCATION_LOC = '//*[@id = "education-section"]'
-    SKILLS_LOC = '//*[@id="ember585"]/ol'
+    SKILLS_LOC = '//ol'
     # '//ol[@class="pv-skill-categories-section__top-skills pv-profile-section__section-info section-info pb1")]'
 
     EXPERIENCE_XPATH = ''.join([EXPERIENCE_LOC, r"//ul//li"])
@@ -96,7 +94,6 @@ class WebPage:
         if "Featured" in self.section_list:
             featured = self.driver.find_elements_by_xpath(self.FEATURED_XPATH)
             self.scraped_data[self.url].update({"Featured": self._parse_featured(featured)})
-        self.driver.close()
 
     def _parse_experience(self, experience):
         """Parses the experience section using the raw scraped data. Records the number of jobs
@@ -127,7 +124,8 @@ class WebPage:
 
     def _parse_featured(self, featured):
         """Parses the featured section using the raw scraped data.
-        Returns the number of items in the section as a key:value pair"""
+        Returns the number of items in the section as a key:value pair
+        Not yet implemented"""
 
         pass
 
@@ -140,14 +138,7 @@ class WebPage:
             skills_dict.update({result[0]: result[2]})
         return skills_dict
 
-    def export_json(self, out_name):
-        """Exports the scraped data from the web page as a json file"""
-        with open(out_name + '.json', 'w') as json_dump:
-            json.dump(self.scraped_data, json_dump)
 
-    def print_data(self):
-        """pprints the scraped data from the web page"""
-        pprint.pprint(self.scraped_data)
 
     def create_dictionary_from_pairs(self, item_list):
         """Given a list, creates a dictionary with key equal to the first item in the list
@@ -157,6 +148,14 @@ class WebPage:
                     if item_list[x] in self.FIELDS and len(item_list[x]) > 0}
         return {item_list[0]: sub_dict}
 
+    def export_json(self, out_name):
+        """Exports the scraped data from the web page as a json file"""
+        with open(out_name + '.json', 'w') as json_dump:
+            json.dump(self.scraped_data, json_dump)
+
+    def print_data(self):
+        """pprints the scraped data from the web page"""
+        pprint.pprint(self.scraped_data)
 
 if __name__ == "__main__":
     print("All tests passed")

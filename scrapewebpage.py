@@ -157,5 +157,11 @@ class WebPage:
         """pprints the scraped data from the web page"""
         pprint.pprint(self.scraped_data)
 
+    def export_data(self):
+        """Exports the data as a dictionary"""
+        return self.scraped_data
+
 if __name__ == "__main__":
+
+
     print("All tests passed")

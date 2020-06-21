@@ -45,3 +45,5 @@ See also the list of [contributors](https://github.com/kagantx/contributors) who
 
 * https://www.linkedin.com/pulse/how-easy-scraping-data-from-linkedin-profiles-david-craven/
 
+* https://www.youtube.com/watch?v=d2GBO_QjRlo&t=106s
+

@@ -85,14 +85,13 @@ class LikenBot():
                 """ SCRAP THE PROFILE -> DANIEL FUNCTION"""
                 my_class = WebPage(url_profile, self.driver)
                 my_class.get_data()
-                self.final_dic_result[url_profile] = my_class.export_data()
+                self.final_dic_result.update(my_class.export_data())
 
 
             except:
                 continue
 
         self.driver.close()
-        # print(self.final_dic_result)
 
     def save_result(self):
         """The function saves our result in a pickle file"""

@@ -22,6 +22,8 @@ We are always able to scrape the first few sections
 The python packages required are listed in requirements.txt. The main package
 used is selenium, which does all the scraping because LinkedIn is a highly dynamic website.
 
+Put your linkedin login information in the file login_info.py
+
 ### Installing
 
 To install, place all the files in a single directory and create an environment with all of the 

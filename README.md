@@ -28,6 +28,7 @@ To install, place all the files in a single directory and create an environment 
 libraries in requirements.txt
 
 
+
 ## Built With
 
 * Pycharm
@@ -35,12 +36,12 @@ libraries in requirements.txt
 ## Authors
 
 * **Daniel Kagan** -- [kagantx](https://github.com/kagantx)
-* **Lucas Bensaid**
+* **Lucas Bensaid** -- [lucasbens](https://github.com/lucasbens)
+
 See also the list of [contributors](https://github.com/kagantx/contributors) who participated in this project.
 
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* https://www.linkedin.com/pulse/how-easy-scraping-data-from-linkedin-profiles-david-craven/
+

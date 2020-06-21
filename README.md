@@ -27,7 +27,9 @@ used is selenium, which does all the scraping because LinkedIn is a highly dynam
 To install, place all the files in a single directory and create an environment with all of the 
 libraries in requirements.txt
 
+### Execute
 
+Run the linkedin_base.py file, put all the files in the same folder
 
 ## Built With
 

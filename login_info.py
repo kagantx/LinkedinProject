@@ -1,2 +1,4 @@
-MAIL='bensaid.lucas@gmail.com'
-PASSWORD='261194'
+#put your mail address to login to linkedin
+MAIL='' 
+#put your linkedin password to login to linkedin
+PASSWORD=''

@@ -1,4 +1,4 @@
 #put your mail address to login to linkedin
-MAIL='' 
+MAIL='kagantx@gmail.com'
 #put your linkedin password to login to linkedin
-PASSWORD=''
+PASSWORD='2q9z2eB^z'

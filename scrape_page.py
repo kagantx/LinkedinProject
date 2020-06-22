@@ -43,10 +43,7 @@ class WebPage:
     # XPATH locations for each section (loc) and its fields (xpath)
     LOCS["Experience"] = '//*[@id = "experience-section"]'
     LOCS["Education"] = '//*[@id = "education-section"]'
-    LOCS["Skills"] = '//ol'
-    # Alternative skills LOC:
-    # '[@class="pv-skill-categories-section__top-skills pv-profile-section__section-info section-info pb1")]'
-    # Neither works all the time
+    LOCS["Skills"] = '//*[@class="pv-profile-section pv-skill-categories-section artdeco-container-card ember-view"]'
 
     XPATHS["Experience"] = ''.join([LOCS["Experience"], r"//ul//li"])
     XPATHS["Education"] = ''.join([LOCS["Education"], r"//ul//li"])
@@ -92,10 +89,13 @@ class WebPage:
     def _scroll_page(self):
         """Scrolls through the web page to ensure that all elements of the page can be loaded"""
         self.driver.execute_script("window.scrollTo(0, (document.body.scrollHeight/4));")
+        self.driver.execute_script("window.scrollTo(0, (3*document.body.scrollHeight/8));")
         sleep(self.SCROLL_PAUSE_TIME)
         self.driver.execute_script("window.scrollTo(0, (document.body.scrollHeight/2));")
+        self.driver.execute_script("window.scrollTo(0, (5*document.body.scrollHeight/8));")
         sleep(self.SCROLL_PAUSE_TIME)
         self.driver.execute_script("window.scrollTo(0, (3*document.body.scrollHeight/4));")
+        self.driver.execute_script("window.scrollTo(0, (7*document.body.scrollHeight/8));")
 
     def _get_section(self, section):
         """Gets the data for a section. First, it scrolls to the section on the web page
@@ -114,7 +114,7 @@ class WebPage:
         don't need to filter it"""
         output_dictionary = {}
         inner_list = []
-        output_dictionary.update({"Number of Entries": len(data)})
+
 
         for entry in data:
             entry_fields = entry.text.split('\n')
@@ -123,8 +123,7 @@ class WebPage:
             if section in ["Skills"]:
                 if len(entry_fields) > 1:
                     inner_list.append({entry_fields[0]: entry_fields[2]})
-                else:
-                    inner_list.append({entry_fields[0]: '0'})
+        output_dictionary.update({"Number of Entries": len(inner_list)})
         output_dictionary.update({"Data": inner_list})
         return output_dictionary
 

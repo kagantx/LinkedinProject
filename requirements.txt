@@ -1,5 +1,5 @@
-selenium
-time
-pickle
-json
-pprint
+setuptools>=46.4.0
+requests>=2.23.0
+beautifulsoup4>=4.9.0
+selenium>=3.141.0
+click>=7.1.2

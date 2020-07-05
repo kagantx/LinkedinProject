@@ -3,6 +3,7 @@ from time import sleep
 from selenium.webdriver.common.keys import Keys
 from scrape_page import WebPage
 import pickle
+import pprint
 
 
 class LinkedinBot:
@@ -21,7 +22,7 @@ class LinkedinBot:
 
     PREFIX = "https://www.linkedin.com/in/"
 
-    def __init__(self, email,password,job="data scientist", location="Tel Aviv", nb_pages=2):
+    def __init__(self, email,password,sections,job="data scientist", location="Tel Aviv", nb_pages=2):
 
         """ Initializes the LinkedinBot class. Also initializes the Selenium driver for scraping the webpage
             and the dictionaries that contains the results
@@ -40,6 +41,7 @@ class LinkedinBot:
         self.job = job
         self.location = location
         self.nb_pages = nb_pages
+        self.sections=sections
 
     def login(self):
         """ This function logs in to the LinkedIn web site"""
@@ -107,7 +109,7 @@ class LinkedinBot:
         for url_profile in list_of_urls:
             try:
                 sleep(1)
-                this_url = WebPage(url_profile, self.driver)
+                this_url = WebPage(url_profile, self.driver,self.sections)
                 this_url.get_data()
                 self.scraped_page_data.update(this_url.export_data())
 
@@ -131,7 +133,7 @@ class LinkedinBot:
 
         dbfile = open('profile_pickle', 'rb')
         db = pickle.load(dbfile)
-        print(db)
+        pprint.pprint(db)
         dbfile.close()
 
 

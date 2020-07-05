@@ -31,9 +31,7 @@ class WebPage:
     scraped_data - data scraped from web page
 
     """
-    DEFAULT_SECTIONS = ["Skills", "Experience", "Education"]
 
-    ALL_SECTIONS = {"Experience", "Education", "Skills"}
     EXPERIENCE_FIELDS = {'Company Name', 'Dates Employed', 'Employment Duration', 'Location'}
     EDUCATION_FIELDS = {'Degree Name', 'Field Of Study', "Dates attended or expected graduation"}
     FIELDS = EXPERIENCE_FIELDS.union(EDUCATION_FIELDS)
@@ -50,17 +48,14 @@ class WebPage:
     XPATHS["Skills"] = ''.join([LOCS["Skills"], r"//li"])
 
     SCROLL_PAUSE_TIME = 1
-
-    def __init__(self, url, my_driver, section_list=None, output_file="web_page"):
+    FAILED_SECTION_SCRAPE="Failed to parse section: {}.\n Got Error: {}"
+    DEFAULT_SECTIONS=["Experience","Education","Skills"]
+    def __init__(self, url, my_driver, sections=None, output_file="web_page"):
         """Initializes the WebPage class. Accepts a url for the page and an optional section list.
          Also initializes the Selenium driver for scraping the webpage and the scraped_data
          variable that contains the results"""
         self.url = url
-        if section_list is None:
-            section_list = self.DEFAULT_SECTIONS
-        self.section_list = [section_item.title() for section_item in section_list]
-        if not self.ALL_SECTIONS >= set(self.section_list):
-            raise ValueError("You asked for a LinkedIn section that we cannot scrape.")
+        self.sections = sections
         self.output_file = output_file
 
         # Initialize data to
@@ -71,17 +66,17 @@ class WebPage:
     def get_data(self):
         """Goes to the url of the chosen page.
         Scrolls through the page to make sure it is loaded
-        Then, scrapes data for all sections in self.section_list"""
+        Then, scrapes data for all sections in self.sections"""
 
         self.driver.get(self.url)
 
         self._scroll_page()
 
-        for section in self.section_list:
+        for section in self.sections:
             try:
                 section_data = self._get_section(section)
             except Exception as ex:
-                print("Failed to parse section: {}.\n Got Error: {}".format(section, ex))
+                print(self.FAILED_SECTION_SCRAPE.format(section, ex))
                 self.scraped_data[self.url].update({section: {}})
             else:
                 self.scraped_data[self.url].update({section: section_data})

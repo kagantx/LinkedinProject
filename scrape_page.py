@@ -1,6 +1,7 @@
 from time import sleep
 import json
 import pprint
+from constants import *
 
 from selenium.webdriver.common.action_chains import ActionChains
 
@@ -19,9 +20,7 @@ class WebPage:
      dump_json to dump the data to a json file
      export_data to export the data to another program
 
-    Contains class constants:
-    DEFAULT_SECTIONS (default sections to scrape)
-    ALL_SECTIONS (all sections possible to scrape)
+    Uses constants:
     XPATHS and LOCS (Xpath and location for each section)
     (section)_FIELDS (fields to scrape for each section
     SCROLL_PAUSE_TIME (time to wait while scrolling to input variables
@@ -32,25 +31,7 @@ class WebPage:
 
     """
 
-    EXPERIENCE_FIELDS = {'Company Name', 'Dates Employed', 'Employment Duration', 'Location'}
-    EDUCATION_FIELDS = {'Degree Name', 'Field Of Study', "Dates attended or expected graduation"}
-    FIELDS = EXPERIENCE_FIELDS.union(EDUCATION_FIELDS)
-
-    LOCS = {}
-    XPATHS = {}
-    # XPATH locations for each section (loc) and its fields (xpath)
-    LOCS["Experience"] = '//*[@id = "experience-section"]'
-    LOCS["Education"] = '//*[@id = "education-section"]'
-    LOCS["Skills"] = '//*[@class="pv-profile-section pv-skill-categories-section artdeco-container-card ember-view"]'
-
-    XPATHS["Experience"] = ''.join([LOCS["Experience"], r"//ul//li"])
-    XPATHS["Education"] = ''.join([LOCS["Education"], r"//ul//li"])
-    XPATHS["Skills"] = ''.join([LOCS["Skills"], r"//li"])
-
-    SCROLL_PAUSE_TIME = 1
-    FAILED_SECTION_SCRAPE="Failed to parse section: {}.\n Got Error: {}"
-    DEFAULT_SECTIONS=["Experience","Education","Skills"]
-    def __init__(self, url, my_driver, sections=None, output_file="web_page"):
+    def __init__(self, url, my_driver, sections=SECTION_DICT.values(), output_file="web_page"):
         """Initializes the WebPage class. Accepts a url for the page and an optional section list.
          Also initializes the Selenium driver for scraping the webpage and the scraped_data
          variable that contains the results"""
@@ -69,35 +50,32 @@ class WebPage:
         Then, scrapes data for all sections in self.sections"""
 
         self.driver.get(self.url)
-
         self._scroll_page()
-
+        failures=0
         for section in self.sections:
             try:
                 section_data = self._get_section(section)
             except Exception as ex:
                 print(self.FAILED_SECTION_SCRAPE.format(section, ex))
                 self.scraped_data[self.url].update({section: {}})
+                failures+=1
             else:
                 self.scraped_data[self.url].update({section: section_data})
+        if failures == len(self.sections):
+            raise ValueError(NO_SECTIONS_FOUND_ERROR)
 
     def _scroll_page(self):
         """Scrolls through the web page to ensure that all elements of the page can be loaded"""
-        self.driver.execute_script("window.scrollTo(0, (document.body.scrollHeight/4));")
-        self.driver.execute_script("window.scrollTo(0, (3*document.body.scrollHeight/8));")
-        sleep(self.SCROLL_PAUSE_TIME)
-        self.driver.execute_script("window.scrollTo(0, (document.body.scrollHeight/2));")
-        self.driver.execute_script("window.scrollTo(0, (5*document.body.scrollHeight/8));")
-        sleep(self.SCROLL_PAUSE_TIME)
-        self.driver.execute_script("window.scrollTo(0, (3*document.body.scrollHeight/4));")
-        self.driver.execute_script("window.scrollTo(0, (7*document.body.scrollHeight/8));")
+        for location in range(NUM_SCROLL_POSITIONS):
+            self.driver.execute_script(SCROLL_COMMAND.format(location/NUM_SCROLL_POSITIONS))
+            sleep(SCROLL_PAUSE_TIME)
 
     def _get_section(self, section):
         """Gets the data for a section. First, it scrolls to the section on the web page
         Then it gets the data using the XPATH of the section. Finally, it parses the data."""
         ActionChains(self.driver).move_to_element(
-            self.driver.find_element_by_xpath(self.LOCS[section])).perform()
-        section_data = self.driver.find_elements_by_xpath(self.XPATHS[section])
+            self.driver.find_element_by_xpath(LOCS[section])).perform()
+        section_data = self.driver.find_elements_by_xpath(XPATHS[section])
         return self._parse_data(section, section_data)
 
     def _parse_data(self, section, data):
@@ -110,12 +88,11 @@ class WebPage:
         output_dictionary = {}
         inner_list = []
 
-
         for entry in data:
             entry_fields = entry.text.split('\n')
-            if section in ["Experience", "Education"]:
+            if section in DICTIONARY_SECTIONS:
                 inner_list.append(self.create_dictionary_from_pairs(entry_fields))
-            if section in ["Skills"]:
+            if section in SKIP_ONE_SECTIONS:
                 if len(entry_fields) > 1:
                     inner_list.append({entry_fields[0]: entry_fields[2]})
         output_dictionary.update({"Number of Entries": len(inner_list)})
@@ -127,7 +104,7 @@ class WebPage:
         and value equal to a dictionary containing keys for entries present in self.FIELDS
         and values equal to the following item in item_list"""
         sub_dict = {item_list[x]: item_list[x + 1] for x in range(1, len(item_list) - 1)
-                    if item_list[x] in self.FIELDS and len(item_list[x]) > 0}
+                    if item_list[x] in FIELDS and len(item_list[x]) > 0}
         return {item_list[0]: sub_dict}
 
     def export_json(self, out_name):

@@ -1,2 +1,2 @@
-MAIL='bensaid.lucas@gmail.com'
-PASSWORD='261194'
+MAIL=''
+PASSWORD=''

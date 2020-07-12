@@ -62,7 +62,7 @@ class WebPage:
             else:
                 self.scraped_data[self.url].update({section: section_data})
         if failures == len(self.sections):
-            raise ValueError(NO_SECTIONS_FOUND_ERROR)
+            raise ValueError(PAGE_SCRAPE_FAILED_ERROR)
 
     def _scroll_page(self):
         """Scrolls through the web page to ensure that all elements of the page can be loaded"""

@@ -4,6 +4,7 @@ This project scrapes LinkedIn to find profiles of people with a given job title 
 
 The default job title is Data Scientist
 The default location is Tel Aviv
+The default number of pages to scrape is 1
 
 It extracts three sections:
 
@@ -22,7 +23,7 @@ We are always able to scrape the first few sections
 The python packages required are listed in requirements.txt. The main package
 used is selenium, which does all the scraping because LinkedIn is a highly dynamic website.
 
-Put your linkedin login information in the file login_info.py
+Your linkedin login information is a required input parameter to the script.
 
 ### Installing
 
@@ -31,7 +32,7 @@ libraries in requirements.txt
 
 ### Execute
 
-Run the linkedin_base.py file, put all the files in the same folder
+Run the linkedin_scraper.py file with appropriate command line arguments, put all the files in the same folder
 
 ## Built With
 

@@ -15,7 +15,6 @@ DEFAULT_PAGES_TO_SCRAPE
 
 """
 
-
 from linkedin_base import LinkedinBot
 import click
 from constants import *
@@ -34,16 +33,18 @@ def main(email, password, job, location, nb_pages, sections):
     """Sanitizes inputs and then calls the Parser if input is OK"""
     if nb_pages < 1:
         raise ValueError(NO_PAGES_REQUESTED)
-    section_set=set([character for character in sections])
+    section_set = set([character for character in sections])
     if not section_set.issubset(SECTION_DICT.keys()):
         raise ValueError(INVALID_SECTION_REQUESTED.format(sections))
-    sections=[SECTION_DICT[sec] for sec in section_set]
+    sections = [SECTION_DICT[sec] for sec in section_set]
 
     bot = LinkedinBot(email, password, job=job, location=location, nb_pages=nb_pages, sections=sections)
     bot.login()
     bot.scrape_url_profiles()
     bot.save_result()
     bot.load_result()
+    bot.create_db()
 
 
-main()
+if __name__ == '__main__':
+    main()

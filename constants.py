@@ -77,6 +77,13 @@ SECTION_DICT={'x':"Experience",'e':'Education','s':'Skills'}
 
 
 
+# database
+
+DB_FILENAME = 'linkedin.db'
+
+
+
+
 if __name__=="__main__":
 
 

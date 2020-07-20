@@ -4,7 +4,9 @@ import pprint
 from constants import *
 
 from selenium.webdriver.common.action_chains import ActionChains
+from linkedin_logger import getmylogger
 
+logger = getmylogger(__name__)
 
 class WebPage:
     """Represents a LinkedIn webpage.
@@ -54,9 +56,9 @@ class WebPage:
         failures=0
         for section in self.sections:
             try:
-                section_data = self._get_section(section)
+                 section_data = self._get_section(section)
             except Exception as ex:
-                print(self.FAILED_SECTION_SCRAPE.format(section, ex))
+                logger.error(FAILED_SECTION_SCRAPE.format(section, ex))
                 self.scraped_data[self.url].update({section: {}})
                 failures+=1
             else:

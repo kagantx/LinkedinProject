@@ -4,10 +4,14 @@ from selenium.webdriver.common.keys import Keys
 from scrape_page import WebPage
 import pickle
 import pprint
-import sqlite3
-import os
+
 from constants import *
 
+from linkedin_logger import getmylogger
+
+
+
+logger = getmylogger(__name__)
 
 class LinkedinBot:
     """Represents a LinkedIn url profile scraper bot.
@@ -15,7 +19,7 @@ class LinkedinBot:
         Contains methods:
             __init__ to set variables and validate the user's choice of job and location to scrape
             login function to connect on Linkedin web site
-            scrape_url_profile function to scrape every valid url profile
+            get_profile_urls function to find every valid url profile
             save_result function to dump the scrape data to a pickle file
             load_result function to load the scrape data to a pickle file
 
@@ -44,6 +48,8 @@ class LinkedinBot:
         self.nb_pages = nb_pages
         self.sections = sections
 
+
+
     def login(self):
         """ This function logs in to the LinkedIn web site"""
         self.driver.get(LINKEDIN_MAIN_URL)
@@ -65,8 +71,8 @@ class LinkedinBot:
         # log in to the website
         login_btn_2 = self.driver.find_element_by_xpath(LOGIN_BUTTON_XPATH)
         login_btn_2.click()
-
-    def scrape_url_profiles(self):
+        logger.info(SUCCESSFULLY_LOGGED_IN)
+    def get_profile_urls(self):
         """ This function searches google for profiles on LinkedIn
         that match the search terms given by the user"""
         self.driver.get(GOOGLE_URL)
@@ -78,10 +84,11 @@ class LinkedinBot:
         query.send_keys(GOOGLE_SEARCH_STRING.format(self.job, self.location))
         query.send_keys(Keys.RETURN)
         sleep(CLICK_WAIT_TIME)
-
-        for i in range(self.nb_pages):
+        logger.info(SEARCHED_GOOGLE.format(self.job, self.location))
+        for page in range(self.nb_pages):
 
             # Find links that correspond to search results
+
             linkedin_urls = self.driver.find_elements_by_class_name(CORRECT_GOOGLE_RESULT_ID)
 
             # Find valid urls by ensuring they do not contain '...' and have length > 0
@@ -100,16 +107,15 @@ class LinkedinBot:
                 sleep(CLICK_WAIT_TIME * 2)
 
             except:
-                print('Unable to search for any more profiles')
+                logger.warning(NO_MORE_PROFILES_MESSAGE)
                 break
 
-            self.scrape_content_profiles()
 
     def scrape_content_profiles(self):
 
         # Get the list of all the LinkedIn profiles
         list_of_urls = self.url_dic.keys()
-        print(NUM_PROFILES_FOUND.format(len(list_of_urls)))
+        logger.info(NUM_PROFILES_FOUND.format(len(list_of_urls)))
         # Loop over all urls to scrape data on it using the class WebPage from scrape_page.py
         for url_profile in list_of_urls:
             try:
@@ -120,8 +126,7 @@ class LinkedinBot:
 
 
             except Exception as ex:
-                print(PAGE_SCRAPE_FAILED_ERROR.format(ex, url_profile))
-                print("Moving on to next profile")
+                logger.error(PAGE_SCRAPE_FAILED_ERROR.format(ex, url_profile))
                 continue
 
         self.driver.close()
@@ -129,234 +134,15 @@ class LinkedinBot:
     def save_result(self):
         """The function saves our result in a pickle file"""
 
-        dbfile = open(PICKLE_FILENAME, 'wb')
+        dbfile = open(DEFAULT_PICKLE_FILENAME, 'wb')
         pickle.dump(self.scraped_page_data, dbfile)
         dbfile.close()
 
     def load_result(self):
         """The function loads our result from the pickle file"""
 
-        dbfile = open(PICKLE_FILENAME, 'rb')
+        dbfile = open(DEFAULT_PICKLE_FILENAME, 'rb')
         db = pickle.load(dbfile)
         pprint.pprint(db)
         dbfile.close()
 
-    def create_db(self):
-        """The function will create the database"""
-
-        if os.path.exists(DB_FILENAME):
-            os.remove(DB_FILENAME)
-
-        con = sqlite3.connect(DB_FILENAME)
-        cur = con.cursor()
-
-        cur.execute(''' CREATE TABLE `profiles` (
-                          `url` varchar(255) PRIMARY KEY,
-                          `search_job` varchar(255),
-                          `search_location` varchar(255));
-
-                        ''')
-
-        cur.execute(''' CREATE TABLE `institutions` (
-                          `id` integer PRIMARY KEY AUTOINCREMENT,
-                          `name` varchar(255) UNIQUE
-
-                        );
-
-                        ''')
-
-        cur.execute(''' CREATE TABLE `subjects` (
-                          `id` integer PRIMARY KEY AUTOINCREMENT,
-                          `name` varchar(255) UNIQUE
-                        );
-
-                        ''')
-
-        cur.execute(''' CREATE TABLE `skill_list` (
-                          `id` integer PRIMARY KEY AUTOINCREMENT,
-                          `name` varchar(255) UNIQUE
-                        );
-
-                        ''')
-
-        cur.execute(''' CREATE TABLE `companies` (
-                          `id` integer PRIMARY KEY AUTOINCREMENT,
-                          `name` varchar(255) UNIQUE
-                        );
-
-                        ''')
-
-        cur.execute('''  CREATE TABLE `educations` (
-                          `id` integer PRIMARY KEY AUTOINCREMENT,
-                          `url` varchar(255),
-                          `graduation_type` varchar(255),
-                          `id_institution` integer,
-                          `id_subject` integer ,
-                          `date` datetime,
-                          FOREIGN KEY (`url`) REFERENCES `profiles` (`url`),
-                          FOREIGN KEY (`id_institution`) REFERENCES `institutions` (`id`),
-                          FOREIGN KEY (`id_subject`) REFERENCES `subjects` (`id`)
-                        );
-
-                        ''')
-
-        cur.execute(''' CREATE TABLE `skills` (
-                          `id` integer PRIMARY KEY AUTOINCREMENT,
-                          `url` varchar(255),
-                          `id_skill` int,
-                          `n_endorsements` int,
-                          FOREIGN KEY (`url`) REFERENCES `profiles` (`url`),
-                          FOREIGN KEY (`id_skill`) REFERENCES `skill_list` (`id`)
-                        );
-
-                        ''')
-
-        cur.execute(''' CREATE TABLE `experiences` (
-                          `id` INTEGER PRIMARY KEY AUTOINCREMENT,
-                          `url` varchar(255),
-                          `id_company` integer,
-                          `job_name` varchar(255),
-                          `start_date` datetime,
-                          `duration` datetime,
-                          `location` varchar(255),
-                          FOREIGN KEY (`url`) REFERENCES `profiles` (`url`),
-                          FOREIGN KEY (`id_company`) REFERENCES `companies` (`id`)
-                        );
-
-                        ''')
-        con.commit()
-        self.insert_data(con, cur)
-
-    def insert_data(self, con, cur):
-        """The function will insert data inside the database"""
-
-        JOB_SEARCH = self.job
-        LOCATION_SEARCH = self.location
-
-        # open the pickle file
-        dbfile = open(PICKLE_FILENAME, 'rb')
-        db = pickle.load(dbfile)
-
-        """Insert experiments"""
-        for url in db.keys():
-            for experience in db[url]['Experience']['Data']:
-
-                job_name = 'Nan'
-                company_name = 'Nan'
-                location = 'Nan'
-                duration = 'Nan'
-                start_date = 'Nan'
-
-                try:
-                    job_name = list(experience.keys())[0]
-                except:
-                    pass
-
-                try:
-                    company_name = experience[job_name]['Company Name']
-                except:
-                    pass
-
-                try:
-                    location = experience[job_name]['Location']
-                except:
-                    pass
-
-                try:
-                    duration = experience[job_name]['Employment Duration']
-                except:
-                    pass
-
-                try:
-                    start_date = experience[job_name]['Dates Employed']
-
-                except:
-                    pass
-
-                if job_name in ['Title', 'Company Name']:
-                    job_name = 'Nan'
-
-                cur.execute(''' INSERT OR IGNORE INTO companies(name) VALUES(?)''', [company_name])
-
-                cur.execute('''SELECT id FROM companies WHERE name=(?)''', [company_name])
-
-                id_company = cur.fetchone()[0]
-
-                cur.execute(
-                    ''' INSERT OR IGNORE INTO experiences(url, id_company, job_name, start_date, duration, location)\
-                     VALUES(?,?,?,?,?,?)''',
-                    [url, id_company, job_name, start_date, duration, location])
-
-            cur.execute(''' INSERT OR IGNORE INTO profiles(url,search_job,search_location) VALUES(?,?,?)''',
-                        [url, JOB_SEARCH, LOCATION_SEARCH])
-        con.commit()
-
-        """Education"""
-        for url in db.keys():
-            for education in db[url]['Education']['Data']:
-                institution = 'Nan'
-                Degree_Name = 'Nan'
-                Field_Of_Study = 'Nan'
-                Dates = 'Nan'
-                try:
-                    institution = list(education.keys())[0]
-                except:
-                    pass
-
-                try:
-                    Degree_Name = education[institution]['Degree Name']
-                except:
-                    pass
-
-                try:
-                    Field_Of_Study = education[institution]['Field Of Study']
-                except:
-                    pass
-
-                try:
-                    Dates = education[institution]['Dates attended or expected graduation']
-                except:
-                    pass
-
-                cur.execute(''' INSERT OR IGNORE INTO institutions(name) VALUES(?)''', [institution])
-
-                cur.execute('''SELECT id FROM institutions WHERE name=(?)''', [institution])
-                id_institution = cur.fetchone()[0]
-
-                cur.execute(''' INSERT OR IGNORE INTO subjects(name) VALUES(?)''', [Field_Of_Study])
-
-                cur.execute('''SELECT id FROM subjects WHERE name=(?)''', [Field_Of_Study])
-                id_subject = cur.fetchone()[0]
-
-                cur.execute(
-                    ''' INSERT OR IGNORE INTO educations(url, graduation_type, id_institution, id_subject, date ) VALUES(?,?,?,?,?)''', \
-                    [url, Degree_Name, id_institution, id_subject, Dates])
-
-        con.commit()
-
-        """Skills"""
-        for url in db.keys():
-            for skill in db[url]['Skills']['Data']:
-                skill_name = 'Nan'
-                skill_level = 'Nan'
-
-                try:
-                    skill_name = list(skill.keys())[0]
-                except:
-                    pass
-
-                try:
-                    skill_level = skill[skill_name]
-                except:
-                    pass
-
-                cur.execute(''' INSERT OR IGNORE INTO skill_list(name) VALUES(?)''', [skill_name])
-
-                cur.execute('''SELECT id FROM skill_list WHERE name=(?)''', [skill_name])
-
-                id_skill = cur.fetchone()[0]
-
-                cur.execute(''' INSERT OR IGNORE INTO skills(url,id_skill,n_endorsements) VALUES(?,?,?)''', \
-                            [url, id_skill, skill_level])
-        con.commit()
-        con.close()

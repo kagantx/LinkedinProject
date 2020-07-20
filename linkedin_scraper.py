@@ -16,8 +16,22 @@ DEFAULT_PAGES_TO_SCRAPE
 """
 
 from linkedin_base import LinkedinBot
+from linkedin_database import LinkedinDatabase
 import click
+
 from constants import *
+from linkedin_logger import getmylogger
+logger = getmylogger(__name__)
+
+
+
+def validate_sections(ctx, param,value):
+    try:
+        section_set = set([character for character in value])
+        assert set(value).issubset(SECTION_DICT.keys())
+    except AssertionError:
+        raise click.BadParameter(INVALID_SECTION_REQUESTED)
+    return [SECTION_DICT[sec] for sec in section_set]
 
 
 @click.command()
@@ -25,25 +39,29 @@ from constants import *
 @click.argument('password')
 @click.option('--job', '-j', help='Which job type to search for', default=DEFAULT_JOB, show_default=True)
 @click.option('--location', '-l', help='Location to search for jobs', default=DEFAULT_LOCATION, show_default=True)
-@click.option('--nb_pages', '-n', help='How many pages to scrape', default=DEFAULT_PAGES_TO_SCRAPE, show_default=True)
+@click.option('--nb_pages', '-n', help='How many pages to scrape', default=DEFAULT_PAGES_TO_SCRAPE,
+              type=click.IntRange(1,None),show_default=True)
+@click.option('--db_filename', '-d', help='Name of database file',
+              default=DEFAULT_PICKLE_FILENAME, show_default=True)
 @click.option('--sections', '-s',
-              help='Sections to scrape. Please use single letters for E(x)perience (E)ducation (S)kills without spaces in any order',
-              default='xes')
-def main(email, password, job, location, nb_pages, sections):
+              help=SECTIONS_HELP,
+              default=SECTION_LETTERS_DEFAULT)
+def main(email, password, job, location, nb_pages,db_filename, sections):
     """Sanitizes inputs and then calls the Parser if input is OK"""
-    if nb_pages < 1:
-        raise ValueError(NO_PAGES_REQUESTED)
     section_set = set([character for character in sections])
     if not section_set.issubset(SECTION_DICT.keys()):
-        raise ValueError(INVALID_SECTION_REQUESTED.format(sections))
-    sections = [SECTION_DICT[sec] for sec in section_set]
-
+        raise ValueError(INVALID_SECTION_REQUESTED)
+    sections=[SECTION_DICT[sec] for sec in section_set]
     bot = LinkedinBot(email, password, job=job, location=location, nb_pages=nb_pages, sections=sections)
+
+    db_bot = LinkedinDatabase(job=job, location=location, database_file=db_filename)
+
     bot.login()
-    bot.scrape_url_profiles()
+    bot.get_profile_urls()
+    bot.scrape_content_profiles()
     bot.save_result()
     bot.load_result()
-    bot.create_db()
+    db_bot.create_db()
 
 
 if __name__ == '__main__':

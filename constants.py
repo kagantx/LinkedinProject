@@ -1,11 +1,12 @@
 """Constants file. Options that are likely to be changed are on top
  At the bottom, a template is given for adding new sections"""
 
-PICKLE_FILENAME='profile_pickle'
+DEFAULT_PICKLE_FILENAME="profile_pickle"
+
 NUM_SCROLL_POSITIONS=8
 
-SCROLL_PAUSE_TIME = 0.5
-CLICK_WAIT_TIME=1
+SCROLL_PAUSE_TIME = 0.2
+CLICK_WAIT_TIME=0.5
 
 DEFAULT_JOB='Data Scientist'
 DEFAULT_LOCATION='Tel Aviv'
@@ -23,6 +24,7 @@ SKIP_ONE_SECTIONS={"Skills"}
 LOCS = {}
 XPATHS = {}
 
+
 # XPATH locations for each section (loc) and its fields (xpath)
 LOCS["Experience"] = '//*[@id = "experience-section"]'
 LOCS["Education"] = '//*[@id = "education-section"]'
@@ -32,7 +34,7 @@ XPATHS["Experience"] = ''.join([LOCS["Experience"], r"//ul//li"])
 XPATHS["Education"] = ''.join([LOCS["Education"], r"//ul//li"])
 XPATHS["Skills"] = ''.join([LOCS["Skills"], r"//li"])
 
-FAILED_SECTION_SCRAPE_MESSAGE="Failed to parse section: {}.\n Got Error: {}"
+FAILED_SECTION_SCRAPE="Failed to parse section: {}.\n Got Error: {}"
 
 SCROLL_COMMAND="window.scrollTo(0, document.body.scrollHeight*{});"
 
@@ -57,13 +59,19 @@ LINKEDIN_MAIN_URL='https://www.linkedin.com/'
 URL_START_INDEX=2
 URL_END_INDEX=-3
 
+SEARCHED_GOOGLE = "Searched google for your search terms {} and {}"
 NO_MORE_PROFILES_MESSAGE='Unable to search for any more profiles'
-
+SUCCESSFULLY_LOGGED_IN = "Successfully logged in"
 #Constants on top level linkedin_scraper
 
 NO_PAGES_REQUESTED="You must ask to scrape at least one page"
 INVALID_SECTION_REQUESTED="You asked us to scrape a section we cannot scrape. Your input was: {}"
 SECTION_DICT={'x':"Experience",'e':'Education','s':'Skills'}
+SECTIONS_LOC=["E(x)perience","(E)ducation","(S)kills"]
+SECTION_LETTERS_DEFAULT = 'xes'
+SECTIONS_HELP = f"""Sections to scrape. Please use single letters for 
+                {SECTIONS_LOC[0]}, {SECTIONS_LOC[1]}, {SECTIONS_LOC[2]} 
+                    without spaces in any order"""
 
 # Template for adding sections
 #
@@ -79,7 +87,7 @@ SECTION_DICT={'x':"Experience",'e':'Education','s':'Skills'}
 
 # database
 
-DB_FILENAME = 'linkedin.db'
+DEFAULT_DB_FILENAME = 'linkedin.db'
 
 
 

@@ -62,6 +62,7 @@ URL_END_INDEX=-3
 SEARCHED_GOOGLE = "Searched google for your search terms {} and {}"
 NO_MORE_PROFILES_MESSAGE='Unable to search for any more profiles'
 SUCCESSFULLY_LOGGED_IN = "Successfully logged in"
+SUCCESSFUL_SCRAPES_DONE = "Successfully scraped {} profiles"
 #Constants on top level linkedin_scraper
 
 NO_PAGES_REQUESTED="You must ask to scrape at least one page"
@@ -72,6 +73,81 @@ SECTION_LETTERS_DEFAULT = 'xes'
 SECTIONS_HELP = f"""Sections to scrape. Please use single letters for 
                 {SECTIONS_LOC[0]}, {SECTIONS_LOC[1]}, {SECTIONS_LOC[2]} 
                     without spaces in any order"""
+
+CREATE_EXPERIENCES_TABLE = ''' CREATE TABLE `experiences` (
+                          `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+                          `url` varchar(255),
+                          `id_company` integer,
+                          `job_name` varchar(255),
+                          `start_date` datetime,
+                          `duration` datetime,
+                          `location` varchar(255),
+                          FOREIGN KEY (`url`) REFERENCES `profiles` (`url`),
+                          FOREIGN KEY (`id_company`) REFERENCES `companies` (`id`)
+                        );
+
+                        '''
+
+CREATE_SKILLS_TABLE = ''' CREATE TABLE `skills` (
+                          `id` integer PRIMARY KEY AUTOINCREMENT,
+                          `url` varchar(255),
+                          `id_skill` int,
+                          `n_endorsements` int,
+                          FOREIGN KEY (`url`) REFERENCES `profiles` (`url`),
+                          FOREIGN KEY (`id_skill`) REFERENCES `skill_list` (`id`)
+                        );
+
+                        '''
+
+CREATE_EDUCATIONS_TABLE = '''  CREATE TABLE `educations` (
+                          `id` integer PRIMARY KEY AUTOINCREMENT,
+                          `url` varchar(255),
+                          `graduation_type` varchar(255),
+                          `id_institution` integer,
+                          `id_subject` integer ,
+                          `date` datetime,
+                          FOREIGN KEY (`url`) REFERENCES `profiles` (`url`),
+                          FOREIGN KEY (`id_institution`) REFERENCES `institutions` (`id`),
+                          FOREIGN KEY (`id_subject`) REFERENCES `subjects` (`id`)
+                        );
+
+                        '''
+
+CREATE_COMPANIES_TABLE = ''' CREATE TABLE `companies` (
+                          `id` integer PRIMARY KEY AUTOINCREMENT,
+                          `name` varchar(255) UNIQUE
+                        );
+
+                        '''
+
+CREATE_SKILL_LIST_TABLE = ''' CREATE TABLE `skill_list` (
+                          `id` integer PRIMARY KEY AUTOINCREMENT,
+                          `name` varchar(255) UNIQUE
+                        );
+
+                        '''
+
+CREATE_SUBJECTS_TABLE = ''' CREATE TABLE `subjects` (
+                          `id` integer PRIMARY KEY AUTOINCREMENT,
+                          `name` varchar(255) UNIQUE
+                        );
+
+                        '''
+
+CREATE_INSTITUTION_TABLE = ''' CREATE TABLE `institutions` (
+                          `id` integer PRIMARY KEY AUTOINCREMENT,
+                          `name` varchar(255) UNIQUE
+
+                        );
+
+                        '''
+
+CREATE_PROFILES_TABLE = ''' CREATE TABLE `profiles` (
+                          `url` varchar(255) PRIMARY KEY,
+                          `search_job` varchar(255),
+                          `search_location` varchar(255));
+
+                        '''
 
 # Template for adding sections
 #

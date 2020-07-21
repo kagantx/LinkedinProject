@@ -18,6 +18,7 @@ DEFAULT_PAGES_TO_SCRAPE
 from linkedin_base import LinkedinBot
 from linkedin_database import LinkedinDatabase
 import click
+import sys
 
 from constants import *
 from linkedin_logger import getmylogger
@@ -50,7 +51,8 @@ def main(email, password, job, location, nb_pages,db_filename, sections):
     """Sanitizes inputs and then calls the Parser if input is OK"""
     section_set = set([character for character in sections])
     if not section_set.issubset(SECTION_DICT.keys()):
-        raise ValueError(INVALID_SECTION_REQUESTED)
+        logger.critical(INVALID_SECTION_REQUESTED.format(sections))
+        sys.exit(1)
     sections=[SECTION_DICT[sec] for sec in section_set]
     bot = LinkedinBot(email, password, job=job, location=location, nb_pages=nb_pages, sections=sections)
 

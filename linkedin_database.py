@@ -22,80 +22,21 @@ class LinkedinDatabase:
         con = sqlite3.connect(self.database_file)
         cur = con.cursor()
 
-        cur.execute(''' CREATE TABLE `profiles` (
-                          `url` varchar(255) PRIMARY KEY,
-                          `search_job` varchar(255),
-                          `search_location` varchar(255));
-    
-                        ''')
+        cur.execute(CREATE_PROFILES_TABLE)
 
-        cur.execute(''' CREATE TABLE `institutions` (
-                          `id` integer PRIMARY KEY AUTOINCREMENT,
-                          `name` varchar(255) UNIQUE
-    
-                        );
-    
-                        ''')
+        cur.execute(CREATE_INSTITUTION_TABLE)
 
-        cur.execute(''' CREATE TABLE `subjects` (
-                          `id` integer PRIMARY KEY AUTOINCREMENT,
-                          `name` varchar(255) UNIQUE
-                        );
-    
-                        ''')
+        cur.execute(CREATE_SUBJECTS_TABLE)
 
-        cur.execute(''' CREATE TABLE `skill_list` (
-                          `id` integer PRIMARY KEY AUTOINCREMENT,
-                          `name` varchar(255) UNIQUE
-                        );
-    
-                        ''')
+        cur.execute(CREATE_SKILL_LIST_TABLE)
 
-        cur.execute(''' CREATE TABLE `companies` (
-                          `id` integer PRIMARY KEY AUTOINCREMENT,
-                          `name` varchar(255) UNIQUE
-                        );
-    
-                        ''')
+        cur.execute(CREATE_COMPANIES_TABLE)
 
-        cur.execute('''  CREATE TABLE `educations` (
-                          `id` integer PRIMARY KEY AUTOINCREMENT,
-                          `url` varchar(255),
-                          `graduation_type` varchar(255),
-                          `id_institution` integer,
-                          `id_subject` integer ,
-                          `date` datetime,
-                          FOREIGN KEY (`url`) REFERENCES `profiles` (`url`),
-                          FOREIGN KEY (`id_institution`) REFERENCES `institutions` (`id`),
-                          FOREIGN KEY (`id_subject`) REFERENCES `subjects` (`id`)
-                        );
-    
-                        ''')
+        cur.execute(CREATE_EDUCATIONS_TABLE)
 
-        cur.execute(''' CREATE TABLE `skills` (
-                          `id` integer PRIMARY KEY AUTOINCREMENT,
-                          `url` varchar(255),
-                          `id_skill` int,
-                          `n_endorsements` int,
-                          FOREIGN KEY (`url`) REFERENCES `profiles` (`url`),
-                          FOREIGN KEY (`id_skill`) REFERENCES `skill_list` (`id`)
-                        );
-    
-                        ''')
+        cur.execute(CREATE_SKILLS_TABLE)
 
-        cur.execute(''' CREATE TABLE `experiences` (
-                          `id` INTEGER PRIMARY KEY AUTOINCREMENT,
-                          `url` varchar(255),
-                          `id_company` integer,
-                          `job_name` varchar(255),
-                          `start_date` datetime,
-                          `duration` datetime,
-                          `location` varchar(255),
-                          FOREIGN KEY (`url`) REFERENCES `profiles` (`url`),
-                          FOREIGN KEY (`id_company`) REFERENCES `companies` (`id`)
-                        );
-    
-                        ''')
+        cur.execute(CREATE_EXPERIENCES_TABLE)
         con.commit()
         self.insert_data(con, cur)
 

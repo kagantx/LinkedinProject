@@ -10,7 +10,6 @@ from constants import *
 from linkedin_logger import getmylogger
 
 
-
 logger = getmylogger(__name__)
 
 class LinkedinBot:
@@ -117,6 +116,7 @@ class LinkedinBot:
         list_of_urls = self.url_dic.keys()
         logger.info(NUM_PROFILES_FOUND.format(len(list_of_urls)))
         # Loop over all urls to scrape data on it using the class WebPage from scrape_page.py
+        successful_scrapes=0
         for url_profile in list_of_urls:
             try:
                 sleep(CLICK_WAIT_TIME)
@@ -128,7 +128,9 @@ class LinkedinBot:
             except Exception as ex:
                 logger.error(PAGE_SCRAPE_FAILED_ERROR.format(ex, url_profile))
                 continue
-
+            else:
+                successful_scrapes+=1
+        logger.info(SUCCESSFUL_SCRAPES_DONE.format(successful_scrapes))
         self.driver.close()
 
     def save_result(self):
@@ -143,6 +145,7 @@ class LinkedinBot:
 
         dbfile = open(DEFAULT_PICKLE_FILENAME, 'rb')
         db = pickle.load(dbfile)
-        pprint.pprint(db)
+        database_print=pprint.pformat(db)
+        logger.debug(database_print)
         dbfile.close()
 

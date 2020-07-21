@@ -116,7 +116,7 @@ class WebPage:
 
     def print_data(self):
         """pprints the scraped data from the web page"""
-        pprint.pprint(self.scraped_data)
+        pprint.pformat(self.scraped_data)
 
     def export_data(self):
         """Exports the data as a dictionary"""

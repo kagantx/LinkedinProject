@@ -19,28 +19,30 @@ class LinkedinDatabase:
         if os.path.exists(self.database_file):
             os.remove(self.database_file)
 
-        con = sqlite3.connect(self.database_file)
-        cur = con.cursor()
+        self.con = sqlite3.connect(self.database_file)
+        self.cur = self.con.cursor()
 
-        cur.execute(CREATE_PROFILES_TABLE)
+        self.cur.execute(CREATE_PROFILES_TABLE)
 
-        cur.execute(CREATE_INSTITUTION_TABLE)
+        self.cur.execute(CREATE_INSTITUTION_TABLE)
 
-        cur.execute(CREATE_SUBJECTS_TABLE)
+        self.cur.execute(CREATE_SUBJECTS_TABLE)
 
-        cur.execute(CREATE_SKILL_LIST_TABLE)
+        self.cur.execute(CREATE_SKILL_LIST_TABLE)
 
-        cur.execute(CREATE_COMPANIES_TABLE)
+        self.cur.execute(CREATE_COMPANIES_TABLE)
 
-        cur.execute(CREATE_EDUCATIONS_TABLE)
+        self.cur.execute(CREATE_EDUCATIONS_TABLE)
 
-        cur.execute(CREATE_SKILLS_TABLE)
+        self.cur.execute(CREATE_SKILLS_TABLE)
 
-        cur.execute(CREATE_EXPERIENCES_TABLE)
-        con.commit()
-        self.insert_data(con, cur)
+        self.cur.execute(CREATE_EXPERIENCES_TABLE)
+        self.con.commit()
+        logger.info("Created database tables successfully")
 
-    def insert_data(self, con, cur):
+
+
+    def insert_data(self):
         """The function will insert data inside the database"""
 
         # open the pickle file
@@ -86,20 +88,20 @@ class LinkedinDatabase:
                 if job_name in ['Title', 'Company Name']:
                     job_name = 'Nan'
 
-                cur.execute(''' INSERT OR IGNORE INTO companies(name) VALUES(?)''', [company_name])
+                self.cur.execute(''' INSERT OR IGNORE INTO companies(name) VALUES(?)''', [company_name])
 
-                cur.execute('''SELECT id FROM companies WHERE name=(?)''', [company_name])
+                self.cur.execute('''SELECT id FROM companies WHERE name=(?)''', [company_name])
 
-                id_company = cur.fetchone()[0]
+                id_company = self.cur.fetchone()[0]
 
-                cur.execute(
+                self.cur.execute(
                     ''' INSERT OR IGNORE INTO experiences(url, id_company, job_name, start_date, duration, location)\
                      VALUES(?,?,?,?,?,?)''',
                     [url, id_company, job_name, start_date, duration, location])
 
-            cur.execute(''' INSERT OR IGNORE INTO profiles(url,search_job,search_location) VALUES(?,?,?)''',
+            self.cur.execute(''' INSERT OR IGNORE INTO profiles(url,search_job,search_location) VALUES(?,?,?)''',
                         [url, self.job, self.location])
-        con.commit()
+        self.con.commit()
 
         """Education"""
         for url in db.keys():
@@ -128,21 +130,21 @@ class LinkedinDatabase:
                 except:
                     pass
 
-                cur.execute(''' INSERT OR IGNORE INTO institutions(name) VALUES(?)''', [institution])
+                self.cur.execute(''' INSERT OR IGNORE INTO institutions(name) VALUES(?)''', [institution])
 
-                cur.execute('''SELECT id FROM institutions WHERE name=(?)''', [institution])
-                id_institution = cur.fetchone()[0]
+                self.cur.execute('''SELECT id FROM institutions WHERE name=(?)''', [institution])
+                id_institution = self.cur.fetchone()[0]
 
-                cur.execute(''' INSERT OR IGNORE INTO subjects(name) VALUES(?)''', [Field_Of_Study])
+                self.cur.execute(''' INSERT OR IGNORE INTO subjects(name) VALUES(?)''', [Field_Of_Study])
 
-                cur.execute('''SELECT id FROM subjects WHERE name=(?)''', [Field_Of_Study])
-                id_subject = cur.fetchone()[0]
+                self.cur.execute('''SELECT id FROM subjects WHERE name=(?)''', [Field_Of_Study])
+                id_subject = self.cur.fetchone()[0]
 
-                cur.execute(
+                self.cur.execute(
                     ''' INSERT OR IGNORE INTO educations(url, graduation_type, id_institution, id_subject, date ) VALUES(?,?,?,?,?)''', \
                     [url, Degree_Name, id_institution, id_subject, Dates])
 
-        con.commit()
+        self.con.commit()
 
         """Skills"""
         for url in db.keys():
@@ -160,16 +162,16 @@ class LinkedinDatabase:
                 except:
                     pass
 
-                cur.execute(''' INSERT OR IGNORE INTO skill_list(name) VALUES(?)''', [skill_name])
+                self.cur.execute(''' INSERT OR IGNORE INTO skill_list(name) VALUES(?)''', [skill_name])
 
-                cur.execute('''SELECT id FROM skill_list WHERE name=(?)''', [skill_name])
+                self.cur.execute('''SELECT id FROM skill_list WHERE name=(?)''', [skill_name])
 
-                id_skill = cur.fetchone()[0]
+                id_skill = self.cur.fetchone()[0]
 
-                cur.execute(''' INSERT OR IGNORE INTO skills(url,id_skill,n_endorsements) VALUES(?,?,?)''', \
+                self.cur.execute(''' INSERT OR IGNORE INTO skills(url,id_skill,n_endorsements) VALUES(?,?,?)''', \
                             [url, id_skill, skill_level])
-        con.commit()
-        con.close()
+        self.con.commit()
+        self.con.close()
 
 
 

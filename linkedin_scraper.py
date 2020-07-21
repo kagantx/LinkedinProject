@@ -26,15 +26,6 @@ logger = getmylogger(__name__)
 
 
 
-def validate_sections(ctx, param,value):
-    try:
-        section_set = set([character for character in value])
-        assert set(value).issubset(SECTION_DICT.keys())
-    except AssertionError:
-        raise click.BadParameter(INVALID_SECTION_REQUESTED)
-    return [SECTION_DICT[sec] for sec in section_set]
-
-
 @click.command()
 @click.argument('email')
 @click.argument('password')
@@ -64,6 +55,7 @@ def main(email, password, job, location, nb_pages,db_filename, sections):
     bot.save_result()
     bot.load_result()
     db_bot.create_db()
+    db_bot.insert_data()
 
 
 if __name__ == '__main__':

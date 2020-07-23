@@ -6,12 +6,14 @@ from linkedin_logger import getmylogger
 
 logger = getmylogger(__name__)
 
+
 class LinkedinDatabase:
-    def __init__(self,job=DEFAULT_JOB,location=DEFAULT_LOCATION,database_file=DEFAULT_DB_FILENAME, pickle_name=DEFAULT_PICKLE_FILENAME):
-        self.job=job
-        self.location=location
-        self.database_file=database_file
-        self.pickle_name=pickle_name
+    def __init__(self, job=DEFAULT_JOB, location=DEFAULT_LOCATION, database_file=DEFAULT_DB_FILENAME,
+                 pickle_name=DEFAULT_PICKLE_FILENAME):
+        self.job = job
+        self.location = location
+        self.database_file = database_file
+        self.pickle_name = pickle_name
 
     def create_db(self):
         """The function will create the database"""
@@ -39,8 +41,6 @@ class LinkedinDatabase:
         self.cur.execute(CREATE_EXPERIENCES_TABLE)
         self.con.commit()
         logger.info("Created database tables successfully")
-
-
 
     def insert_data(self):
         """The function will insert data inside the database"""
@@ -100,7 +100,7 @@ class LinkedinDatabase:
                     [url, id_company, job_name, start_date, duration, location])
 
             self.cur.execute(''' INSERT OR IGNORE INTO profiles(url,search_job,search_location) VALUES(?,?,?)''',
-                        [url, self.job, self.location])
+                             [url, self.job, self.location])
         self.con.commit()
 
         """Education"""
@@ -169,17 +169,10 @@ class LinkedinDatabase:
                 id_skill = self.cur.fetchone()[0]
 
                 self.cur.execute(''' INSERT OR IGNORE INTO skills(url,id_skill,n_endorsements) VALUES(?,?,?)''', \
-                            [url, id_skill, skill_level])
+                                 [url, id_skill, skill_level])
         self.con.commit()
         self.con.close()
 
 
-
-
-
-
-if __name__=="__main__":
-
-
-
+if __name__ == "__main__":
     print("All tests passed")

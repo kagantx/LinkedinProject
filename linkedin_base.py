@@ -9,8 +9,8 @@ from constants import *
 
 from linkedin_logger import getmylogger
 
-
 logger = getmylogger(__name__)
+
 
 class LinkedinBot:
     """Represents a LinkedIn url profile scraper bot.
@@ -47,8 +47,6 @@ class LinkedinBot:
         self.nb_pages = nb_pages
         self.sections = sections
 
-
-
     def login(self):
         """ This function logs in to the LinkedIn web site"""
         self.driver.get(LINKEDIN_MAIN_URL)
@@ -71,6 +69,7 @@ class LinkedinBot:
         login_btn_2 = self.driver.find_element_by_xpath(LOGIN_BUTTON_XPATH)
         login_btn_2.click()
         logger.info(SUCCESSFULLY_LOGGED_IN)
+
     def get_profile_urls(self):
         """ This function searches google for profiles on LinkedIn
         that match the search terms given by the user"""
@@ -109,14 +108,13 @@ class LinkedinBot:
                 logger.warning(NO_MORE_PROFILES_MESSAGE)
                 break
 
-
     def scrape_content_profiles(self):
 
         # Get the list of all the LinkedIn profiles
         list_of_urls = self.url_dic.keys()
         logger.info(NUM_PROFILES_FOUND.format(len(list_of_urls)))
         # Loop over all urls to scrape data on it using the class WebPage from scrape_page.py
-        successful_scrapes=0
+        successful_scrapes = 0
         for url_profile in list_of_urls:
             try:
                 sleep(CLICK_WAIT_TIME)
@@ -129,7 +127,7 @@ class LinkedinBot:
                 logger.error(PAGE_SCRAPE_FAILED_ERROR.format(ex, url_profile))
                 continue
             else:
-                successful_scrapes+=1
+                successful_scrapes += 1
         logger.info(SUCCESSFUL_SCRAPES_DONE.format(successful_scrapes))
         self.driver.close()
 
@@ -145,7 +143,6 @@ class LinkedinBot:
 
         dbfile = open(DEFAULT_PICKLE_FILENAME, 'rb')
         db = pickle.load(dbfile)
-        database_print=pprint.pformat(db)
+        database_print = pprint.pformat(db)
         logger.debug(database_print)
         dbfile.close()
-

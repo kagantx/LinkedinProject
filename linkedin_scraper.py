@@ -22,8 +22,8 @@ import sys
 
 from constants import *
 from linkedin_logger import getmylogger
-logger = getmylogger(__name__)
 
+logger = getmylogger(__name__)
 
 
 @click.command()
@@ -32,29 +32,37 @@ logger = getmylogger(__name__)
 @click.option('--job', '-j', help='Which job type to search for', default=DEFAULT_JOB, show_default=True)
 @click.option('--location', '-l', help='Location to search for jobs', default=DEFAULT_LOCATION, show_default=True)
 @click.option('--nb_pages', '-n', help='How many pages to scrape', default=DEFAULT_PAGES_TO_SCRAPE,
-              type=click.IntRange(1,None),show_default=True)
+              type=click.IntRange(1, None), show_default=True)
 @click.option('--db_filename', '-d', help='Name of database file',
-              default=DEFAULT_PICKLE_FILENAME, show_default=True)
+              default=DEFAULT_DB_FILENAME, show_default=True)
 @click.option('--sections', '-s',
               help=SECTIONS_HELP,
               default=SECTION_LETTERS_DEFAULT)
-def main(email, password, job, location, nb_pages,db_filename, sections):
+def main(email, password, job, location, nb_pages, db_filename, sections):
     """Sanitizes inputs and then calls the Parser if input is OK"""
     section_set = set([character for character in sections])
     if not section_set.issubset(SECTION_DICT.keys()):
         logger.critical(INVALID_SECTION_REQUESTED.format(sections))
         sys.exit(1)
-    sections=[SECTION_DICT[sec] for sec in section_set]
-    bot = LinkedinBot(email, password, job=job, location=location, nb_pages=nb_pages, sections=sections)
+    sections = [SECTION_DICT[sec] for sec in section_set]
 
     db_bot = LinkedinDatabase(job=job, location=location, database_file=db_filename)
+
+    bot = LinkedinBot(email, password, job=job, location=location, nb_pages=nb_pages, sections=sections,
+                      database=db_bot)
+
+    db_bot.remove_db()
+    db_bot.remove_db()
+    db_bot.create_db()
+    db_bot.create_db()
 
     bot.login()
     bot.get_profile_urls()
     bot.scrape_content_profiles()
     bot.save_result()
     bot.load_result()
-    db_bot.create_db()
+
+
     # db_bot.insert_data()
 
 

@@ -26,7 +26,7 @@ class LinkedinBot:
 
      """
 
-    def __init__(self, email, password, sections, job="data scientist", location="Tel Aviv", nb_pages=2):
+    def __init__(self, email, password, sections, database, job="data scientist", location="Tel Aviv", nb_pages=2):
 
         """ Initializes the LinkedinBot class. Also initializes the Selenium driver for scraping the webpage
             and the dictionaries that contains the results
@@ -46,6 +46,7 @@ class LinkedinBot:
         self.location = location
         self.nb_pages = nb_pages
         self.sections = sections
+        self.db_bot = database
 
     def login(self):
         """ This function logs in to the LinkedIn web site"""
@@ -121,7 +122,11 @@ class LinkedinBot:
                 this_url = WebPage(url_profile, self.driver, self.sections)
                 this_url.get_data()
                 self.scraped_page_data.update(this_url.export_data())
+                # pprint.pprint(this_url.export_data())
 
+                self.db_bot.insert_experience(dic_scrap_profile=this_url.export_data(), url=url_profile)
+                self.db_bot.insert_education(dic_scrap_profile=this_url.export_data(), url=url_profile)
+                self.db_bot.insert_skills(dic_scrap_profile=this_url.export_data(), url=url_profile)
 
             except Exception as ex:
                 logger.error(PAGE_SCRAPE_FAILED_ERROR.format(ex, url_profile))
@@ -130,6 +135,7 @@ class LinkedinBot:
                 successful_scrapes += 1
         logger.info(SUCCESSFUL_SCRAPES_DONE.format(successful_scrapes))
         self.driver.close()
+        self.db_bot.close()
 
     def save_result(self):
         """The function saves our result in a pickle file"""

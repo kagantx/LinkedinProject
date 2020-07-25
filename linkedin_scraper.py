@@ -55,7 +55,7 @@ def main(email, password, job, location, nb_pages,db_filename, sections):
     bot.save_result()
     bot.load_result()
     db_bot.create_db()
-    db_bot.insert_data()
+    # db_bot.insert_data()
 
 
 if __name__ == '__main__':

@@ -1,0 +1,1173 @@
+2020-07-25 13:59:11,283~INFO~Successfully logged in~module:linkedin_base~function:linkedin_base
+2020-07-25 13:59:17,620~INFO~Searched google for your search terms Data Scientist and Tel Aviv~module:linkedin_base~function:linkedin_base
+2020-07-25 13:59:25,148~INFO~Found 6 profiles to scrape~module:linkedin_base~function:linkedin_base
+2020-07-25 13:59:31,057~ERROR~Failed to parse section: Experience.
+ Got Error: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id = "experience-section"]"}
+  (Session info: chrome=84.0.4147.89)
+~module:scrape_page~function:scrape_page
+2020-07-25 13:59:31,077~ERROR~Failed to parse section: Skills.
+ Got Error: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class="pv-profile-section pv-skill-categories-section artdeco-container-card ember-view"]"}
+  (Session info: chrome=84.0.4147.89)
+~module:scrape_page~function:scrape_page
+2020-07-25 13:59:31,093~ERROR~Failed to parse section: Education.
+ Got Error: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id = "education-section"]"}
+  (Session info: chrome=84.0.4147.89)
+~module:scrape_page~function:scrape_page
+2020-07-25 13:59:31,093~ERROR~Completely failed to scrape profile Completely failed to scrape profile {}. Got exception {}. Got exception https://www.linkedin.com/in/roiinbar/~module:linkedin_base~function:linkedin_base
+2020-07-25 13:59:34,731~ERROR~Completely failed to scrape profile Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=84.0.4147.89)
+. Got exception https://www.linkedin.com/in/elansasson/~module:linkedin_base~function:linkedin_base
+2020-07-25 13:59:35,239~ERROR~Completely failed to scrape profile Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=84.0.4147.89)
+. Got exception https://www.linkedin.com/in/kostyakilimnik/~module:linkedin_base~function:linkedin_base
+2020-07-25 13:59:35,746~ERROR~Completely failed to scrape profile Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=84.0.4147.89)
+. Got exception https://www.linkedin.com/in/roy-sasson-5274392/~module:linkedin_base~function:linkedin_base
+2020-07-25 13:59:36,251~ERROR~Completely failed to scrape profile Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=84.0.4147.89)
+. Got exception https://www.linkedin.com/in/samueljefroykin/~module:linkedin_base~function:linkedin_base
+2020-07-25 13:59:36,758~ERROR~Completely failed to scrape profile Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=84.0.4147.89)
+. Got exception https://www.linkedin.com/in/blochdavid/~module:linkedin_base~function:linkedin_base
+2020-07-25 13:59:36,759~INFO~Successfully scraped 0 profiles~module:linkedin_base~function:linkedin_base
+2020-07-25 14:00:01,912~INFO~Successfully logged in~module:linkedin_base~function:linkedin_base
+2020-07-25 14:00:08,538~INFO~Searched google for your search terms Data Scientist and Tel Aviv~module:linkedin_base~function:linkedin_base
+2020-07-25 14:00:10,137~INFO~Found 6 profiles to scrape~module:linkedin_base~function:linkedin_base
+2020-07-25 14:01:03,049~INFO~Successfully scraped 6 profiles~module:linkedin_base~function:linkedin_base
+2020-07-25 14:01:03,435~DEBUG~{'https://www.linkedin.com/in/elansasson/': {'Education': {'Data': [{'Technion - Israel Institute of Technology': {'Dates attended or expected graduation': '1982 '
+                                                                                                                                                            '– '
+                                                                                                                                                            '1986',
+                                                                                                                   'Degree Name': 'B.Sc.',
+                                                                                                                   'Field Of Study': 'Information '
+                                                                                                                                     'Systems '
+                                                                                                                                     'IEM'}},
+                                                                    {'Ben-Gurion University of the Negev': {'Dates attended or expected graduation': '2008 '
+                                                                                                                                                     '– '
+                                                                                                                                                     '2012',
+                                                                                                            'Degree Name': 'Ph.D.',
+                                                                                                            'Field Of Study': 'Information '
+                                                                                                                              'Systems'}},
+                                                                    {'Ben-Gurion University of the Negev': {'Dates attended or expected graduation': '2002 '
+                                                                                                                                                     '– '
+                                                                                                                                                     '2004',
+                                                                                                            'Degree Name': 'M.Sc. '
+                                                                                                                           'Magna '
+                                                                                                                           'Cum '
+                                                                                                                           'Laude',
+                                                                                                            'Field Of Study': 'Information '
+                                                                                                                              'Systems '
+                                                                                                                              'IEM'}}],
+                                                           'Number of Entries': 3},
+                                             'Experience': {'Data': [{'CEO and Co-Founder': {'Company Name': 'Data '
+                                                                                                             'Science '
+                                                                                                             'Group',
+                                                                                             'Dates Employed': 'Jan '
+                                                                                                               '2015 '
+                                                                                                               '– '
+                                                                                                               'Present',
+                                                                                             'Employment Duration': '5 '
+                                                                                                                    'yrs '
+                                                                                                                    '7 '
+                                                                                                                    'mos',
+                                                                                             'Location': 'Israel'}},
+                                                                     {'Advisory Board Member': {'Company Name': 'Lagoon',
+                                                                                                'Dates Employed': 'Apr '
+                                                                                                                  '2020 '
+                                                                                                                  '– '
+                                                                                                                  'Present',
+                                                                                                'Employment Duration': '4 '
+                                                                                                                       'mos',
+                                                                                                'Location': 'Israel'}},
+                                                                     {'Company Name': {'Dates Employed': 'Sep '
+                                                                                                         '2014 '
+                                                                                                         '– '
+                                                                                                         'Present',
+                                                                                       'Employment Duration': '5 '
+                                                                                                              'yrs '
+                                                                                                              '11 '
+                                                                                                              'mos',
+                                                                                       'Location': 'Tel '
+                                                                                                   'Aviv '
+                                                                                                   'University'}},
+                                                                     {'Title': {'Dates Employed': 'Jan '
+                                                                                                  '2018 '
+                                                                                                  '– '
+                                                                                                  'Present',
+                                                                                'Employment Duration': '2 '
+                                                                                                       'yrs '
+                                                                                                       '7 '
+                                                                                                       'mos',
+                                                                                'Location': 'Tel '
+                                                                                            'Aviv '
+                                                                                            'University'}},
+                                                                     {'Title': {'Dates Employed': 'Sep '
+                                                                                                  '2014 '
+                                                                                                  '– '
+                                                                                                  'Present',
+                                                                                'Employment Duration': '5 '
+                                                                                                       'yrs '
+                                                                                                       '11 '
+                                                                                                       'mos'}},
+                                                                     {'Adjunct Lecturer': {'Company Name': 'Tel '
+                                                                                                           'Aviv '
+                                                                                                           'University '
+                                                                                                           '- '
+                                                                                                           'School '
+                                                                                                           'of '
+                                                                                                           'Management',
+                                                                                           'Dates Employed': 'Nov '
+                                                                                                             '2015 '
+                                                                                                             '– '
+                                                                                                             'Present',
+                                                                                           'Employment Duration': '4 '
+                                                                                                                  'yrs '
+                                                                                                                  '9 '
+                                                                                                                  'mos'}},
+                                                                     {'Director': {'Company Name': 'Sonarax '
+                                                                                                   'Technologies',
+                                                                                   'Dates Employed': 'Jan '
+                                                                                                     '2015 '
+                                                                                                     '– '
+                                                                                                     'Present',
+                                                                                   'Employment Duration': '5 '
+                                                                                                          'yrs '
+                                                                                                          '7 '
+                                                                                                          'mos'}}],
+                                                            'Number of Entries': 7},
+                                             'Skills': {'Data': [{'Machine Learning': '35'},
+                                                                 {'Data Mining': '45'},
+                                                                 {'Text Mining': '20'}],
+                                                        'Number of Entries': 3}},
+ 'https://www.linkedin.com/in/kostyakilimnik/': {'Education': {'Data': [{'Tel Aviv University': {'Dates attended or expected graduation': '2002 '
+                                                                                                                                          '– '
+                                                                                                                                          '2006',
+                                                                                                 'Degree Name': 'Bachelor '
+                                                                                                                'of '
+                                                                                                                'Science '
+                                                                                                                '(B.Sc.)',
+                                                                                                 'Field Of Study': 'Electrical '
+                                                                                                                   'and '
+                                                                                                                   'Electronics '
+                                                                                                                   'Engineering'}},
+                                                                        {'Ben-Gurion University of the Negev': {'Dates attended or expected graduation': '2015 '
+                                                                                                                                                         '– '
+                                                                                                                                                         '2018',
+                                                                                                                'Degree Name': 'Master '
+                                                                                                                               'of '
+                                                                                                                               'Science '
+                                                                                                                               '(MSc)',
+                                                                                                                'Field Of Study': 'Information '
+                                                                                                                                  'System '
+                                                                                                                                  'Engineering'}},
+                                                                        {'Coursera': {}}],
+                                                               'Number of Entries': 3},
+                                                 'Experience': {'Data': [{'Head of Y-DATA Program (ydata.co.il)': {'Company Name': 'Yandex',
+                                                                                                                   'Dates Employed': 'Mar '
+                                                                                                                                     '2018 '
+                                                                                                                                     '– '
+                                                                                                                                     'Present',
+                                                                                                                   'Employment Duration': '2 '
+                                                                                                                                          'yrs '
+                                                                                                                                          '5 '
+                                                                                                                                          'mos',
+                                                                                                                   'Location': 'Tel '
+                                                                                                                               'Aviv '
+                                                                                                                               'Area, '
+                                                                                                                               'Israel'}},
+                                                                         {'Company Name': {'Dates Employed': 'Sep '
+                                                                                                             '2009 '
+                                                                                                             '– '
+                                                                                                             'Dec '
+                                                                                                             '2010',
+                                                                                           'Employment Duration': '1 '
+                                                                                                                  'yr '
+                                                                                                                  '4 '
+                                                                                                                  'mos'}},
+                                                                         {'Title': {'Dates Employed': 'Nov '
+                                                                                                      '2010 '
+                                                                                                      '– '
+                                                                                                      'Jul '
+                                                                                                      '2018',
+                                                                                    'Employment Duration': '7 '
+                                                                                                           'yrs '
+                                                                                                           '9 '
+                                                                                                           'mos'}},
+                                                                         {'Title': {'Dates Employed': 'Sep '
+                                                                                                      '2009 '
+                                                                                                      '– '
+                                                                                                      'Dec '
+                                                                                                      '2010',
+                                                                                    'Employment Duration': '1 '
+                                                                                                           'yr '
+                                                                                                           '4 '
+                                                                                                           'mos'}},
+                                                                         {'System engineer': {'Company Name': 'Israel '
+                                                                                                              'Air '
+                                                                                                              'Force',
+                                                                                              'Dates Employed': 'Sep '
+                                                                                                                '2006 '
+                                                                                                                '– '
+                                                                                                                'Oct '
+                                                                                                                '2009',
+                                                                                              'Employment Duration': '3 '
+                                                                                                                     'yrs '
+                                                                                                                     '2 '
+                                                                                                                     'mos'}},
+                                                                         {'Logic Design': {'Company Name': 'Intel',
+                                                                                           'Dates Employed': 'Aug '
+                                                                                                             '2005 '
+                                                                                                             '– '
+                                                                                                             'Oct '
+                                                                                                             '2006',
+                                                                                           'Employment Duration': '1 '
+                                                                                                                  'yr '
+                                                                                                                  '3 '
+                                                                                                                  'mos'}}],
+                                                                'Number of Entries': 6},
+                                                 'Skills': {'Data': [{'SQL': '28'},
+                                                                     {'Machine Learning': '28'},
+                                                                     {'Object Oriented Design': '24'}],
+                                                            'Number of Entries': 3}},
+ 'https://www.linkedin.com/in/roiinbar/': {'Education': {'Data': [{'Afeka Tel Aviv Academic College of Engineering': {'Dates attended or expected graduation': '2018 '
+                                                                                                                                                               '– '
+                                                                                                                                                               '2020',
+                                                                                                                      'Degree Name': 'Master '
+                                                                                                                                     'of '
+                                                                                                                                     'Science '
+                                                                                                                                     '- '
+                                                                                                                                     'M.Sc.',
+                                                                                                                      'Field Of Study': 'Artificial '
+                                                                                                                                        'Intelligence'}},
+                                                                  {'Afeka Tel Aviv Academic College of Engineering': {'Dates attended or expected graduation': '2014 '
+                                                                                                                                                               '– '
+                                                                                                                                                               '2018',
+                                                                                                                      'Degree Name': 'B.sc '
+                                                                                                                                     'Mechanical '
+                                                                                                                                     'engineering '
+                                                                                                                                     'Mechatronics, '
+                                                                                                                                     'Robotics, '
+                                                                                                                                     'and '
+                                                                                                                                     'Automation '
+                                                                                                                                     'Engineering',
+                                                                                                                      'Field Of Study': 'Mechanical '
+                                                                                                                                        'Engineering'}}],
+                                                         'Number of Entries': 2},
+                                           'Experience': {'Data': [{'Company Name': {'Dates Employed': 'Jun '
+                                                                                                       '2017 '
+                                                                                                       '– '
+                                                                                                       'Jun '
+                                                                                                       '2018',
+                                                                                     'Employment Duration': '1 '
+                                                                                                            'yr '
+                                                                                                            '1 '
+                                                                                                            'mo',
+                                                                                     'Location': 'Tel '
+                                                                                                 'Aviv '
+                                                                                                 'Area, '
+                                                                                                 'Israel'}},
+                                                                   {'Title': {'Dates Employed': 'Jun '
+                                                                                                '2018 '
+                                                                                                '– '
+                                                                                                'Present',
+                                                                              'Employment Duration': '2 '
+                                                                                                     'yrs '
+                                                                                                     '2 '
+                                                                                                     'mos',
+                                                                              'Location': 'Tel '
+                                                                                          'Aviv '
+                                                                                          'Area, '
+                                                                                          'Israel'}},
+                                                                   {'Title': {'Dates Employed': 'Jun '
+                                                                                                '2017 '
+                                                                                                '– '
+                                                                                                'Jun '
+                                                                                                '2018',
+                                                                              'Employment Duration': '1 '
+                                                                                                     'yr '
+                                                                                                     '1 '
+                                                                                                     'mo',
+                                                                              'Location': 'Tel '
+                                                                                          'Aviv '
+                                                                                          'Area, '
+                                                                                          'Israel'}},
+                                                                   {'R&D Algorithm Engineer': {'Company Name': 'H.O.S '
+                                                                                                               'R&D '
+                                                                                                               'LTD',
+                                                                                               'Dates Employed': 'Aug '
+                                                                                                                 '2016 '
+                                                                                                                 '– '
+                                                                                                                 'Jun '
+                                                                                                                 '2017',
+                                                                                               'Employment Duration': '11 '
+                                                                                                                      'mos',
+                                                                                               'Location': 'Tel '
+                                                                                                           'Aviv '
+                                                                                                           'Area, '
+                                                                                                           'Israel'}}],
+                                                          'Number of Entries': 4},
+                                           'Skills': {'Data': [{'Python (Programming Language)': '3'},
+                                                               {'MongoDB': '2'},
+                                                               {'AWS Lambda': '2'}],
+                                                      'Number of Entries': 3}},
+ 'https://www.linkedin.com/in/roy-sasson-5274392/': {'Education': {'Data': [{'Tel Aviv University': {'Dates attended or expected graduation': '2007 '
+                                                                                                                                              '– '
+                                                                                                                                              '2013',
+                                                                                                     'Degree Name': 'Ph.D.',
+                                                                                                     'Field Of Study': 'The '
+                                                                                                                       'Eitan '
+                                                                                                                       'Berglas '
+                                                                                                                       'School '
+                                                                                                                       'Of '
+                                                                                                                       'Economics'}},
+                                                                            {'Termination Risk and Agency Problems: Evidence from the NBA | The Journal of Law, Economics, and Organization | Oxford Academic': {}},
+                                                                            {'Tel Aviv University': {'Dates attended or expected graduation': '2005 '
+                                                                                                                                              '– '
+                                                                                                                                              '2007',
+                                                                                                     'Degree Name': 'MA',
+                                                                                                     'Field Of Study': 'The '
+                                                                                                                       'Eitan '
+                                                                                                                       'Berglas '
+                                                                                                                       'School '
+                                                                                                                       'of '
+                                                                                                                       'Economics'}},
+                                                                            {'Tel Aviv University': {'Dates attended or expected graduation': '2002 '
+                                                                                                                                              '– '
+                                                                                                                                              '2005',
+                                                                                                     'Degree Name': 'BA',
+                                                                                                     'Field Of Study': 'School '
+                                                                                                                       'of '
+                                                                                                                       'Psychology'}}],
+                                                                   'Number of Entries': 4},
+                                                     'Experience': {'Data': [{'Company Name': {'Dates Employed': '2017 '
+                                                                                                                 '– '
+                                                                                                                 'Sep '
+                                                                                                                 '2018',
+                                                                                               'Employment Duration': '1 '
+                                                                                                                      'yr'}},
+                                                                             {'Title': {'Dates Employed': 'Sep '
+                                                                                                          '2018 '
+                                                                                                          '– '
+                                                                                                          'Present',
+                                                                                        'Employment Duration': '1 '
+                                                                                                               'yr '
+                                                                                                               '11 '
+                                                                                                               'mos'}},
+                                                                             {'Title': {'Dates Employed': '2017 '
+                                                                                                          '– '
+                                                                                                          'Sep '
+                                                                                                          '2018',
+                                                                                        'Employment Duration': '1 '
+                                                                                                               'yr'}},
+                                                                             {'Lecturer (Econometrics/Data Science)': {'Company Name': 'Tel '
+                                                                                                                                       'Aviv '
+                                                                                                                                       'University',
+                                                                                                                       'Dates Employed': '2008 '
+                                                                                                                                         '– '
+                                                                                                                                         'Present',
+                                                                                                                       'Employment Duration': '12 '
+                                                                                                                                              'yrs',
+                                                                                                                       'Location': 'The '
+                                                                                                                                   'Eitan '
+                                                                                                                                   'Berglas '
+                                                                                                                                   'School '
+                                                                                                                                   'of '
+                                                                                                                                   'Economics'}},
+                                                                             {'Lecturer (Econometrics/Data Science)': {'Company Name': 'The '
+                                                                                                                                       'Interdisciplinary '
+                                                                                                                                       'Center, '
+                                                                                                                                       'Herzliya',
+                                                                                                                       'Dates Employed': '2007 '
+                                                                                                                                         '– '
+                                                                                                                                         'Present',
+                                                                                                                       'Employment Duration': '13 '
+                                                                                                                                              'yrs',
+                                                                                                                       'Location': 'Arison '
+                                                                                                                                   'School '
+                                                                                                                                   'of '
+                                                                                                                                   'Business'}},
+                                                                             {'Chief Data Scientist': {'Company Name': 'Outbrain',
+                                                                                                       'Dates Employed': '2013 '
+                                                                                                                         '– '
+                                                                                                                         '2017',
+                                                                                                       'Employment Duration': '4 '
+                                                                                                                              'yrs',
+                                                                                                       'Location': 'Israel'}},
+                                                                             {'Research Group Lead, Asia Branch': {'Company Name': 'Visual '
+                                                                                                                                   'Domains, '
+                                                                                                                                   'Headquarters',
+                                                                                                                   'Dates Employed': '2008 '
+                                                                                                                                     '– '
+                                                                                                                                     '2013',
+                                                                                                                   'Employment Duration': '5 '
+                                                                                                                                          'yrs'}}],
+                                                                    'Number of Entries': 7},
+                                                     'Skills': {'Data': [{'Econometrics': '54'},
+                                                                         {'Data Science': '23'},
+                                                                         {'Statistics': '25'}],
+                                                                'Number of Entries': 3}},
+ 'https://www.linkedin.com/in/samanthagomplewicz/': {'Education': {'Data': [{'Israel Tech Challenge <itc>': {'Dates attended or expected graduation': '2019 '
+                                                                                                                                                      '– '
+                                                                                                                                                      '2020',
+                                                                                                             'Degree Name': 'Fellow',
+                                                                                                             'Field Of Study': 'Data '
+                                                                                                                               'Science'}},
+                                                                            {'Ecole des Mines de Nantes': {'Dates attended or expected graduation': '2013 '
+                                                                                                                                                    '– '
+                                                                                                                                                    '2016',
+                                                                                                           'Degree Name': 'M2',
+                                                                                                           'Field Of Study': 'Energie'}},
+                                                                            {'Université de Montréal - Ecole polytechnique de Montréal': {'Dates attended or expected graduation': '2014 '
+                                                                                                                                                                                   '– '
+                                                                                                                                                                                   '2015',
+                                                                                                                                          'Field Of Study': 'Génie '
+                                                                                                                                                            'Mécanique'}}],
+                                                                   'Number of Entries': 3},
+                                                     'Experience': {'Data': [{'Data Scientist': {'Company Name': 'Radware '
+                                                                                                                 'Full-time',
+                                                                                                 'Dates Employed': 'Jan '
+                                                                                                                   '2020 '
+                                                                                                                   '– '
+                                                                                                                   'Present',
+                                                                                                 'Employment Duration': '7 '
+                                                                                                                        'mos'}},
+                                                                             {'Data Science Intern - Deep Learning Researcher': {'Company Name': 'Agoda',
+                                                                                                                                 'Dates Employed': 'Sep '
+                                                                                                                                                   '2019 '
+                                                                                                                                                   '– '
+                                                                                                                                                   'Oct '
+                                                                                                                                                   '2019',
+                                                                                                                                 'Employment Duration': '2 '
+                                                                                                                                                        'mos',
+                                                                                                                                 'Location': 'Tel '
+                                                                                                                                             'Aviv '
+                                                                                                                                             'Area, '
+                                                                                                                                             'Israel'}},
+                                                                             {'Data Analyst': {'Company Name': 'Preen.Me',
+                                                                                               'Dates Employed': 'Dec '
+                                                                                                                 '2017 '
+                                                                                                                 '– '
+                                                                                                                 'Apr '
+                                                                                                                 '2019',
+                                                                                               'Employment Duration': '1 '
+                                                                                                                      'yr '
+                                                                                                                      '5 '
+                                                                                                                      'mos',
+                                                                                               'Location': 'Tel '
+                                                                                                           'Aviv '
+                                                                                                           'Area, '
+                                                                                                           'Israel'}},
+                                                                             {'Business Analyst': {'Company Name': 'Eco '
+                                                                                                                   'Wave '
+                                                                                                                   'Power '
+                                                                                                                   'Ltd.',
+                                                                                                   'Dates Employed': 'Nov '
+                                                                                                                     '2016 '
+                                                                                                                     '– '
+                                                                                                                     'Apr '
+                                                                                                                     '2017',
+                                                                                                   'Employment Duration': '6 '
+                                                                                                                          'mos',
+                                                                                                   'Location': 'Tel '
+                                                                                                               'Aviv '
+                                                                                                               'Area, '
+                                                                                                               'Israel'}},
+                                                                             {'Bid Manager': {'Company Name': 'agap2 '
+                                                                                                              '- '
+                                                                                                              'HIQ '
+                                                                                                              'Consulting',
+                                                                                              'Dates Employed': 'Jan '
+                                                                                                                '2016 '
+                                                                                                                '– '
+                                                                                                                'Sep '
+                                                                                                                '2016',
+                                                                                              'Employment Duration': '9 '
+                                                                                                                     'mos'}}],
+                                                                    'Number of Entries': 5},
+                                                     'Skills': {'Data': [{'SQL': '19'},
+                                                                         {'Python': '7'},
+                                                                         {'Data science': '4'}],
+                                                                'Number of Entries': 3}},
+ 'https://www.linkedin.com/in/samueljefroykin/': {'Education': {'Data': [{'Université Paris Dauphine': {'Dates attended or expected graduation': '2012 '
+                                                                                                                                                 '– '
+                                                                                                                                                 '2014',
+                                                                                                        'Degree Name': 'Licence',
+                                                                                                        'Field Of Study': 'Applied '
+                                                                                                                          'Mathematics '
+                                                                                                                          'major '
+                                                                                                                          'Math'}},
+                                                                         {'University of Helsinki': {'Dates attended or expected graduation': '2014 '
+                                                                                                                                              '– '
+                                                                                                                                              '2015',
+                                                                                                     'Degree Name': 'M1 '
+                                                                                                                    'MIDO '
+                                                                                                                    'STM '
+                                                                                                                    '( '
+                                                                                                                    'Stat '
+                                                                                                                    ')',
+                                                                                                     'Field Of Study': 'Mathématiques '
+                                                                                                                       'et '
+                                                                                                                       'statistiques'}},
+                                                                         {'Israel Tech Challenge': {'Dates attended or expected graduation': '2016 '
+                                                                                                                                             '– '
+                                                                                                                                             '2017',
+                                                                                                    'Degree Name': 'Data '
+                                                                                                                   'Science '
+                                                                                                                   '& '
+                                                                                                                   'Cyber '
+                                                                                                                   'Security '
+                                                                                                                   'trainee'}}],
+                                                                'Number of Entries': 3},
+                                                  'Experience': {'Data': [{'Company Name': {'Dates Employed': 'Apr '
+                                                                                                              '2017 '
+                                                                                                              '– '
+                                                                                                              'Sep '
+                                                                                                              '2018',
+                                                                                            'Employment Duration': '1 '
+                                                                                                                   'yr '
+                                                                                                                   '6 '
+                                                                                                                   'mos',
+                                                                                            'Location': 'Tel '
+                                                                                                        'Aviv '
+                                                                                                        'Area, '
+                                                                                                        'Israel'}},
+                                                                          {'Title': {'Dates Employed': 'Sep '
+                                                                                                       '2018 '
+                                                                                                       '– '
+                                                                                                       'Nov '
+                                                                                                       '2019',
+                                                                                     'Employment Duration': '1 '
+                                                                                                            'yr '
+                                                                                                            '3 '
+                                                                                                            'mos',
+                                                                                     'Location': 'Tel '
+                                                                                                 'Aviv '
+                                                                                                 'Area, '
+                                                                                                 'Israel'}},
+                                                                          {'Title': {'Dates Employed': 'Apr '
+                                                                                                       '2017 '
+                                                                                                       '– '
+                                                                                                       'Sep '
+                                                                                                       '2018',
+                                                                                     'Employment Duration': '1 '
+                                                                                                            'yr '
+                                                                                                            '6 '
+                                                                                                            'mos',
+                                                                                     'Location': 'Tel '
+                                                                                                 'Aviv '
+                                                                                                 'Area, '
+                                                                                                 'Israel'}},
+                                                                          {'Data Scientist Student': {'Company Name': 'Motorola '
+                                                                                                                      'Solutions',
+                                                                                                      'Dates Employed': 'Feb '
+                                                                                                                        '2017 '
+                                                                                                                        '– '
+                                                                                                                        'Apr '
+                                                                                                                        '2017',
+                                                                                                      'Employment Duration': '3 '
+                                                                                                                             'mos',
+                                                                                                      'Location': 'Israël'}},
+                                                                          {'Intern R&A Data Scientist': {'Company Name': 'Signals '
+                                                                                                                         'Analytics',
+                                                                                                         'Dates Employed': 'Apr '
+                                                                                                                           '2016 '
+                                                                                                                           '– '
+                                                                                                                           'Sep '
+                                                                                                                           '2016',
+                                                                                                         'Employment Duration': '6 '
+                                                                                                                                'mos',
+                                                                                                         'Location': 'Israël'}},
+                                                                          {'Intern Data Analysis & IT': {'Company Name': 'LIS '
+                                                                                                                         '| '
+                                                                                                                         'Logistics '
+                                                                                                                         'International '
+                                                                                                                         'Service '
+                                                                                                                         '(China)',
+                                                                                                         'Dates Employed': 'Sep '
+                                                                                                                           '2015 '
+                                                                                                                           '– '
+                                                                                                                           'Mar '
+                                                                                                                           '2016',
+                                                                                                         'Employment Duration': '7 '
+                                                                                                                                'mos',
+                                                                                                         'Location': 'Shanghai '
+                                                                                                                     'City, '
+                                                                                                                     'China'}}],
+                                                                 'Number of Entries': 6},
+                                                  'Skills': {'Data': [{'Statistiques': '19'},
+                                                                      {'Python': '17'},
+                                                                      {'R': '18'}],
+                                                             'Number of Entries': 3}}}~module:linkedin_base~function:linkedin_base
+2020-07-25 14:01:03,489~INFO~Created database tables successfully~module:linkedin_database~function:linkedin_database
+2020-07-25 14:42:12,645~INFO~Successfully logged in~module:linkedin_base~function:linkedin_base
+2020-07-25 14:42:18,627~INFO~Searched google for your search terms Data Scientist and Tel Aviv~module:linkedin_base~function:linkedin_base
+2020-07-25 14:42:20,177~INFO~Found 6 profiles to scrape~module:linkedin_base~function:linkedin_base
+2020-07-25 14:42:49,539~ERROR~Failed to parse section: Skills.
+ Got Error: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@class="pv-profile-section pv-skill-categories-section artdeco-container-card ember-view"]"}
+  (Session info: chrome=84.0.4147.89)
+~module:scrape_page~function:scrape_page
+2020-07-25 14:43:06,059~INFO~Successfully scraped 6 profiles~module:linkedin_base~function:linkedin_base
+2020-07-25 14:43:06,401~DEBUG~{'https://www.linkedin.com/in/elansasson/': {'Education': {'Data': [{'Technion - Israel Institute of Technology': {'Dates attended or expected graduation': '1982 '
+                                                                                                                                                            '– '
+                                                                                                                                                            '1986',
+                                                                                                                   'Degree Name': 'B.Sc.',
+                                                                                                                   'Field Of Study': 'Information '
+                                                                                                                                     'Systems '
+                                                                                                                                     'IEM'}},
+                                                                    {'Ben-Gurion University of the Negev': {'Dates attended or expected graduation': '2008 '
+                                                                                                                                                     '– '
+                                                                                                                                                     '2012',
+                                                                                                            'Degree Name': 'Ph.D.',
+                                                                                                            'Field Of Study': 'Information '
+                                                                                                                              'Systems'}},
+                                                                    {'Ben-Gurion University of the Negev': {'Dates attended or expected graduation': '2002 '
+                                                                                                                                                     '– '
+                                                                                                                                                     '2004',
+                                                                                                            'Degree Name': 'M.Sc. '
+                                                                                                                           'Magna '
+                                                                                                                           'Cum '
+                                                                                                                           'Laude',
+                                                                                                            'Field Of Study': 'Information '
+                                                                                                                              'Systems '
+                                                                                                                              'IEM'}}],
+                                                           'Number of Entries': 3},
+                                             'Experience': {'Data': [{'CEO and Co-Founder': {'Company Name': 'Data '
+                                                                                                             'Science '
+                                                                                                             'Group',
+                                                                                             'Dates Employed': 'Jan '
+                                                                                                               '2015 '
+                                                                                                               '– '
+                                                                                                               'Present',
+                                                                                             'Employment Duration': '5 '
+                                                                                                                    'yrs '
+                                                                                                                    '7 '
+                                                                                                                    'mos',
+                                                                                             'Location': 'Israel'}},
+                                                                     {'Advisory Board Member': {'Company Name': 'Lagoon',
+                                                                                                'Dates Employed': 'Apr '
+                                                                                                                  '2020 '
+                                                                                                                  '– '
+                                                                                                                  'Present',
+                                                                                                'Employment Duration': '4 '
+                                                                                                                       'mos',
+                                                                                                'Location': 'Israel'}},
+                                                                     {'Company Name': {'Dates Employed': 'Sep '
+                                                                                                         '2014 '
+                                                                                                         '– '
+                                                                                                         'Present',
+                                                                                       'Employment Duration': '5 '
+                                                                                                              'yrs '
+                                                                                                              '11 '
+                                                                                                              'mos',
+                                                                                       'Location': 'Tel '
+                                                                                                   'Aviv '
+                                                                                                   'University'}},
+                                                                     {'Title': {'Dates Employed': 'Jan '
+                                                                                                  '2018 '
+                                                                                                  '– '
+                                                                                                  'Present',
+                                                                                'Employment Duration': '2 '
+                                                                                                       'yrs '
+                                                                                                       '7 '
+                                                                                                       'mos',
+                                                                                'Location': 'Tel '
+                                                                                            'Aviv '
+                                                                                            'University'}},
+                                                                     {'Title': {'Dates Employed': 'Sep '
+                                                                                                  '2014 '
+                                                                                                  '– '
+                                                                                                  'Present',
+                                                                                'Employment Duration': '5 '
+                                                                                                       'yrs '
+                                                                                                       '11 '
+                                                                                                       'mos'}},
+                                                                     {'Adjunct Lecturer': {'Company Name': 'Tel '
+                                                                                                           'Aviv '
+                                                                                                           'University '
+                                                                                                           '- '
+                                                                                                           'School '
+                                                                                                           'of '
+                                                                                                           'Management',
+                                                                                           'Dates Employed': 'Nov '
+                                                                                                             '2015 '
+                                                                                                             '– '
+                                                                                                             'Present',
+                                                                                           'Employment Duration': '4 '
+                                                                                                                  'yrs '
+                                                                                                                  '9 '
+                                                                                                                  'mos'}},
+                                                                     {'Director': {'Company Name': 'Sonarax '
+                                                                                                   'Technologies',
+                                                                                   'Dates Employed': 'Jan '
+                                                                                                     '2015 '
+                                                                                                     '– '
+                                                                                                     'Present',
+                                                                                   'Employment Duration': '5 '
+                                                                                                          'yrs '
+                                                                                                          '7 '
+                                                                                                          'mos'}}],
+                                                            'Number of Entries': 7},
+                                             'Skills': {'Data': [{'Machine Learning': '35'},
+                                                                 {'Data Mining': '45'},
+                                                                 {'Text Mining': '20'}],
+                                                        'Number of Entries': 3}},
+ 'https://www.linkedin.com/in/kostyakilimnik/': {'Education': {'Data': [{'Tel Aviv University': {'Dates attended or expected graduation': '2002 '
+                                                                                                                                          '– '
+                                                                                                                                          '2006',
+                                                                                                 'Degree Name': 'Bachelor '
+                                                                                                                'of '
+                                                                                                                'Science '
+                                                                                                                '(B.Sc.)',
+                                                                                                 'Field Of Study': 'Electrical '
+                                                                                                                   'and '
+                                                                                                                   'Electronics '
+                                                                                                                   'Engineering'}},
+                                                                        {'Ben-Gurion University of the Negev': {'Dates attended or expected graduation': '2015 '
+                                                                                                                                                         '– '
+                                                                                                                                                         '2018',
+                                                                                                                'Degree Name': 'Master '
+                                                                                                                               'of '
+                                                                                                                               'Science '
+                                                                                                                               '(MSc)',
+                                                                                                                'Field Of Study': 'Information '
+                                                                                                                                  'System '
+                                                                                                                                  'Engineering'}},
+                                                                        {'Coursera': {}}],
+                                                               'Number of Entries': 3},
+                                                 'Experience': {'Data': [{'Head of Y-DATA Program (ydata.co.il)': {'Company Name': 'Yandex',
+                                                                                                                   'Dates Employed': 'Mar '
+                                                                                                                                     '2018 '
+                                                                                                                                     '– '
+                                                                                                                                     'Present',
+                                                                                                                   'Employment Duration': '2 '
+                                                                                                                                          'yrs '
+                                                                                                                                          '5 '
+                                                                                                                                          'mos',
+                                                                                                                   'Location': 'Tel '
+                                                                                                                               'Aviv '
+                                                                                                                               'Area, '
+                                                                                                                               'Israel'}},
+                                                                         {'Company Name': {'Dates Employed': 'Sep '
+                                                                                                             '2009 '
+                                                                                                             '– '
+                                                                                                             'Dec '
+                                                                                                             '2010',
+                                                                                           'Employment Duration': '1 '
+                                                                                                                  'yr '
+                                                                                                                  '4 '
+                                                                                                                  'mos'}},
+                                                                         {'Title': {'Dates Employed': 'Nov '
+                                                                                                      '2010 '
+                                                                                                      '– '
+                                                                                                      'Jul '
+                                                                                                      '2018',
+                                                                                    'Employment Duration': '7 '
+                                                                                                           'yrs '
+                                                                                                           '9 '
+                                                                                                           'mos'}},
+                                                                         {'Title': {'Dates Employed': 'Sep '
+                                                                                                      '2009 '
+                                                                                                      '– '
+                                                                                                      'Dec '
+                                                                                                      '2010',
+                                                                                    'Employment Duration': '1 '
+                                                                                                           'yr '
+                                                                                                           '4 '
+                                                                                                           'mos'}},
+                                                                         {'System engineer': {'Company Name': 'Israel '
+                                                                                                              'Air '
+                                                                                                              'Force',
+                                                                                              'Dates Employed': 'Sep '
+                                                                                                                '2006 '
+                                                                                                                '– '
+                                                                                                                'Oct '
+                                                                                                                '2009',
+                                                                                              'Employment Duration': '3 '
+                                                                                                                     'yrs '
+                                                                                                                     '2 '
+                                                                                                                     'mos'}},
+                                                                         {'Logic Design': {'Company Name': 'Intel',
+                                                                                           'Dates Employed': 'Aug '
+                                                                                                             '2005 '
+                                                                                                             '– '
+                                                                                                             'Oct '
+                                                                                                             '2006',
+                                                                                           'Employment Duration': '1 '
+                                                                                                                  'yr '
+                                                                                                                  '3 '
+                                                                                                                  'mos'}}],
+                                                                'Number of Entries': 6},
+                                                 'Skills': {'Data': [{'SQL': '28'},
+                                                                     {'Machine Learning': '28'},
+                                                                     {'Object Oriented Design': '24'}],
+                                                            'Number of Entries': 3}},
+ 'https://www.linkedin.com/in/roiinbar/': {'Education': {'Data': [{'Afeka Tel Aviv Academic College of Engineering': {'Dates attended or expected graduation': '2018 '
+                                                                                                                                                               '– '
+                                                                                                                                                               '2020',
+                                                                                                                      'Degree Name': 'Master '
+                                                                                                                                     'of '
+                                                                                                                                     'Science '
+                                                                                                                                     '- '
+                                                                                                                                     'M.Sc.',
+                                                                                                                      'Field Of Study': 'Artificial '
+                                                                                                                                        'Intelligence'}},
+                                                                  {'Afeka Tel Aviv Academic College of Engineering': {'Dates attended or expected graduation': '2014 '
+                                                                                                                                                               '– '
+                                                                                                                                                               '2018',
+                                                                                                                      'Degree Name': 'B.sc '
+                                                                                                                                     'Mechanical '
+                                                                                                                                     'engineering '
+                                                                                                                                     'Mechatronics, '
+                                                                                                                                     'Robotics, '
+                                                                                                                                     'and '
+                                                                                                                                     'Automation '
+                                                                                                                                     'Engineering',
+                                                                                                                      'Field Of Study': 'Mechanical '
+                                                                                                                                        'Engineering'}}],
+                                                         'Number of Entries': 2},
+                                           'Experience': {'Data': [{'Company Name': {'Dates Employed': 'Jun '
+                                                                                                       '2017 '
+                                                                                                       '– '
+                                                                                                       'Jun '
+                                                                                                       '2018',
+                                                                                     'Employment Duration': '1 '
+                                                                                                            'yr '
+                                                                                                            '1 '
+                                                                                                            'mo',
+                                                                                     'Location': 'Tel '
+                                                                                                 'Aviv '
+                                                                                                 'Area, '
+                                                                                                 'Israel'}},
+                                                                   {'Title': {'Dates Employed': 'Jun '
+                                                                                                '2018 '
+                                                                                                '– '
+                                                                                                'Present',
+                                                                              'Employment Duration': '2 '
+                                                                                                     'yrs '
+                                                                                                     '2 '
+                                                                                                     'mos',
+                                                                              'Location': 'Tel '
+                                                                                          'Aviv '
+                                                                                          'Area, '
+                                                                                          'Israel'}},
+                                                                   {'Title': {'Dates Employed': 'Jun '
+                                                                                                '2017 '
+                                                                                                '– '
+                                                                                                'Jun '
+                                                                                                '2018',
+                                                                              'Employment Duration': '1 '
+                                                                                                     'yr '
+                                                                                                     '1 '
+                                                                                                     'mo',
+                                                                              'Location': 'Tel '
+                                                                                          'Aviv '
+                                                                                          'Area, '
+                                                                                          'Israel'}},
+                                                                   {'R&D Algorithm Engineer': {'Company Name': 'H.O.S '
+                                                                                                               'R&D '
+                                                                                                               'LTD',
+                                                                                               'Dates Employed': 'Aug '
+                                                                                                                 '2016 '
+                                                                                                                 '– '
+                                                                                                                 'Jun '
+                                                                                                                 '2017',
+                                                                                               'Employment Duration': '11 '
+                                                                                                                      'mos',
+                                                                                               'Location': 'Tel '
+                                                                                                           'Aviv '
+                                                                                                           'Area, '
+                                                                                                           'Israel'}}],
+                                                          'Number of Entries': 4},
+                                           'Skills': {'Data': [{'Python (Programming Language)': '3'},
+                                                               {'MongoDB': '2'},
+                                                               {'AWS Lambda': '2'}],
+                                                      'Number of Entries': 3}},
+ 'https://www.linkedin.com/in/roy-sasson-5274392/': {'Education': {'Data': [{'Tel Aviv University': {'Dates attended or expected graduation': '2007 '
+                                                                                                                                              '– '
+                                                                                                                                              '2013',
+                                                                                                     'Degree Name': 'Ph.D.',
+                                                                                                     'Field Of Study': 'The '
+                                                                                                                       'Eitan '
+                                                                                                                       'Berglas '
+                                                                                                                       'School '
+                                                                                                                       'Of '
+                                                                                                                       'Economics'}},
+                                                                            {'Termination Risk and Agency Problems: Evidence from the NBA | The Journal of Law, Economics, and Organization | Oxford Academic': {}},
+                                                                            {'Tel Aviv University': {'Dates attended or expected graduation': '2005 '
+                                                                                                                                              '– '
+                                                                                                                                              '2007',
+                                                                                                     'Degree Name': 'MA',
+                                                                                                     'Field Of Study': 'The '
+                                                                                                                       'Eitan '
+                                                                                                                       'Berglas '
+                                                                                                                       'School '
+                                                                                                                       'of '
+                                                                                                                       'Economics'}},
+                                                                            {'Tel Aviv University': {'Dates attended or expected graduation': '2002 '
+                                                                                                                                              '– '
+                                                                                                                                              '2005',
+                                                                                                     'Degree Name': 'BA',
+                                                                                                     'Field Of Study': 'School '
+                                                                                                                       'of '
+                                                                                                                       'Psychology'}}],
+                                                                   'Number of Entries': 4},
+                                                     'Experience': {'Data': [{'Company Name': {'Dates Employed': '2017 '
+                                                                                                                 '– '
+                                                                                                                 'Sep '
+                                                                                                                 '2018',
+                                                                                               'Employment Duration': '1 '
+                                                                                                                      'yr'}},
+                                                                             {'Title': {'Dates Employed': 'Sep '
+                                                                                                          '2018 '
+                                                                                                          '– '
+                                                                                                          'Present',
+                                                                                        'Employment Duration': '1 '
+                                                                                                               'yr '
+                                                                                                               '11 '
+                                                                                                               'mos'}},
+                                                                             {'Title': {'Dates Employed': '2017 '
+                                                                                                          '– '
+                                                                                                          'Sep '
+                                                                                                          '2018',
+                                                                                        'Employment Duration': '1 '
+                                                                                                               'yr'}},
+                                                                             {'Lecturer (Econometrics/Data Science)': {'Company Name': 'Tel '
+                                                                                                                                       'Aviv '
+                                                                                                                                       'University',
+                                                                                                                       'Dates Employed': '2008 '
+                                                                                                                                         '– '
+                                                                                                                                         'Present',
+                                                                                                                       'Employment Duration': '12 '
+                                                                                                                                              'yrs',
+                                                                                                                       'Location': 'The '
+                                                                                                                                   'Eitan '
+                                                                                                                                   'Berglas '
+                                                                                                                                   'School '
+                                                                                                                                   'of '
+                                                                                                                                   'Economics'}},
+                                                                             {'Lecturer (Econometrics/Data Science)': {'Company Name': 'The '
+                                                                                                                                       'Interdisciplinary '
+                                                                                                                                       'Center, '
+                                                                                                                                       'Herzliya',
+                                                                                                                       'Dates Employed': '2007 '
+                                                                                                                                         '– '
+                                                                                                                                         'Present',
+                                                                                                                       'Employment Duration': '13 '
+                                                                                                                                              'yrs',
+                                                                                                                       'Location': 'Arison '
+                                                                                                                                   'School '
+                                                                                                                                   'of '
+                                                                                                                                   'Business'}},
+                                                                             {'Chief Data Scientist': {'Company Name': 'Outbrain',
+                                                                                                       'Dates Employed': '2013 '
+                                                                                                                         '– '
+                                                                                                                         '2017',
+                                                                                                       'Employment Duration': '4 '
+                                                                                                                              'yrs',
+                                                                                                       'Location': 'Israel'}},
+                                                                             {'Research Group Lead, Asia Branch': {'Company Name': 'Visual '
+                                                                                                                                   'Domains, '
+                                                                                                                                   'Headquarters',
+                                                                                                                   'Dates Employed': '2008 '
+                                                                                                                                     '– '
+                                                                                                                                     '2013',
+                                                                                                                   'Employment Duration': '5 '
+                                                                                                                                          'yrs'}}],
+                                                                    'Number of Entries': 7},
+                                                     'Skills': {'Data': [{'Econometrics': '54'},
+                                                                         {'Data Science': '23'},
+                                                                         {'Statistics': '25'}],
+                                                                'Number of Entries': 3}},
+ 'https://www.linkedin.com/in/samanthagomplewicz/': {'Education': {'Data': [{'Israel Tech Challenge <itc>': {'Dates attended or expected graduation': '2019 '
+                                                                                                                                                      '– '
+                                                                                                                                                      '2020',
+                                                                                                             'Degree Name': 'Fellow',
+                                                                                                             'Field Of Study': 'Data '
+                                                                                                                               'Science'}},
+                                                                            {'Ecole des Mines de Nantes': {'Dates attended or expected graduation': '2013 '
+                                                                                                                                                    '– '
+                                                                                                                                                    '2016',
+                                                                                                           'Degree Name': 'M2',
+                                                                                                           'Field Of Study': 'Energie'}},
+                                                                            {'Université de Montréal - Ecole polytechnique de Montréal': {'Dates attended or expected graduation': '2014 '
+                                                                                                                                                                                   '– '
+                                                                                                                                                                                   '2015',
+                                                                                                                                          'Field Of Study': 'Génie '
+                                                                                                                                                            'Mécanique'}}],
+                                                                   'Number of Entries': 3},
+                                                     'Experience': {'Data': [{'Data Scientist': {'Company Name': 'Radware '
+                                                                                                                 'Full-time',
+                                                                                                 'Dates Employed': 'Jan '
+                                                                                                                   '2020 '
+                                                                                                                   '– '
+                                                                                                                   'Present',
+                                                                                                 'Employment Duration': '7 '
+                                                                                                                        'mos'}},
+                                                                             {'Data Science Intern - Deep Learning Researcher': {'Company Name': 'Agoda',
+                                                                                                                                 'Dates Employed': 'Sep '
+                                                                                                                                                   '2019 '
+                                                                                                                                                   '– '
+                                                                                                                                                   'Oct '
+                                                                                                                                                   '2019',
+                                                                                                                                 'Employment Duration': '2 '
+                                                                                                                                                        'mos',
+                                                                                                                                 'Location': 'Tel '
+                                                                                                                                             'Aviv '
+                                                                                                                                             'Area, '
+                                                                                                                                             'Israel'}},
+                                                                             {'Data Analyst': {'Company Name': 'Preen.Me',
+                                                                                               'Dates Employed': 'Dec '
+                                                                                                                 '2017 '
+                                                                                                                 '– '
+                                                                                                                 'Apr '
+                                                                                                                 '2019',
+                                                                                               'Employment Duration': '1 '
+                                                                                                                      'yr '
+                                                                                                                      '5 '
+                                                                                                                      'mos',
+                                                                                               'Location': 'Tel '
+                                                                                                           'Aviv '
+                                                                                                           'Area, '
+                                                                                                           'Israel'}},
+                                                                             {'Business Analyst': {'Company Name': 'Eco '
+                                                                                                                   'Wave '
+                                                                                                                   'Power '
+                                                                                                                   'Ltd.',
+                                                                                                   'Dates Employed': 'Nov '
+                                                                                                                     '2016 '
+                                                                                                                     '– '
+                                                                                                                     'Apr '
+                                                                                                                     '2017',
+                                                                                                   'Employment Duration': '6 '
+                                                                                                                          'mos',
+                                                                                                   'Location': 'Tel '
+                                                                                                               'Aviv '
+                                                                                                               'Area, '
+                                                                                                               'Israel'}},
+                                                                             {'Bid Manager': {'Company Name': 'agap2 '
+                                                                                                              '- '
+                                                                                                              'HIQ '
+                                                                                                              'Consulting',
+                                                                                              'Dates Employed': 'Jan '
+                                                                                                                '2016 '
+                                                                                                                '– '
+                                                                                                                'Sep '
+                                                                                                                '2016',
+                                                                                              'Employment Duration': '9 '
+                                                                                                                     'mos'}}],
+                                                                    'Number of Entries': 5},
+                                                     'Skills': {'Data': [{'SQL': '19'},
+                                                                         {'Python': '7'},
+                                                                         {'Data science': '4'}],
+                                                                'Number of Entries': 3}},
+ 'https://www.linkedin.com/in/samueljefroykin/': {'Education': {'Data': [{'Université Paris Dauphine': {'Dates attended or expected graduation': '2012 '
+                                                                                                                                                 '– '
+                                                                                                                                                 '2014',
+                                                                                                        'Degree Name': 'Licence',
+                                                                                                        'Field Of Study': 'Applied '
+                                                                                                                          'Mathematics '
+                                                                                                                          'major '
+                                                                                                                          'Math'}},
+                                                                         {'University of Helsinki': {'Dates attended or expected graduation': '2014 '
+                                                                                                                                              '– '
+                                                                                                                                              '2015',
+                                                                                                     'Degree Name': 'M1 '
+                                                                                                                    'MIDO '
+                                                                                                                    'STM '
+                                                                                                                    '( '
+                                                                                                                    'Stat '
+                                                                                                                    ')',
+                                                                                                     'Field Of Study': 'Mathématiques '
+                                                                                                                       'et '
+                                                                                                                       'statistiques'}},
+                                                                         {'Israel Tech Challenge': {'Dates attended or expected graduation': '2016 '
+                                                                                                                                             '– '
+                                                                                                                                             '2017',
+                                                                                                    'Degree Name': 'Data '
+                                                                                                                   'Science '
+                                                                                                                   '& '
+                                                                                                                   'Cyber '
+                                                                                                                   'Security '
+                                                                                                                   'trainee'}}],
+                                                                'Number of Entries': 3},
+                                                  'Experience': {'Data': [{'Company Name': {'Dates Employed': 'Apr '
+                                                                                                              '2017 '
+                                                                                                              '– '
+                                                                                                              'Sep '
+                                                                                                              '2018',
+                                                                                            'Employment Duration': '1 '
+                                                                                                                   'yr '
+                                                                                                                   '6 '
+                                                                                                                   'mos',
+                                                                                            'Location': 'Tel '
+                                                                                                        'Aviv '
+                                                                                                        'Area, '
+                                                                                                        'Israel'}},
+                                                                          {'Title': {'Dates Employed': 'Sep '
+                                                                                                       '2018 '
+                                                                                                       '– '
+                                                                                                       'Nov '
+                                                                                                       '2019',
+                                                                                     'Employment Duration': '1 '
+                                                                                                            'yr '
+                                                                                                            '3 '
+                                                                                                            'mos',
+                                                                                     'Location': 'Tel '
+                                                                                                 'Aviv '
+                                                                                                 'Area, '
+                                                                                                 'Israel'}},
+                                                                          {'Title': {'Dates Employed': 'Apr '
+                                                                                                       '2017 '
+                                                                                                       '– '
+                                                                                                       'Sep '
+                                                                                                       '2018',
+                                                                                     'Employment Duration': '1 '
+                                                                                                            'yr '
+                                                                                                            '6 '
+                                                                                                            'mos',
+                                                                                     'Location': 'Tel '
+                                                                                                 'Aviv '
+                                                                                                 'Area, '
+                                                                                                 'Israel'}},
+                                                                          {'Data Scientist Student': {'Company Name': 'Motorola '
+                                                                                                                      'Solutions',
+                                                                                                      'Dates Employed': 'Feb '
+                                                                                                                        '2017 '
+                                                                                                                        '– '
+                                                                                                                        'Apr '
+                                                                                                                        '2017',
+                                                                                                      'Employment Duration': '3 '
+                                                                                                                             'mos',
+                                                                                                      'Location': 'Israël'}},
+                                                                          {'Intern R&A Data Scientist': {'Company Name': 'Signals '
+                                                                                                                         'Analytics',
+                                                                                                         'Dates Employed': 'Apr '
+                                                                                                                           '2016 '
+                                                                                                                           '– '
+                                                                                                                           'Sep '
+                                                                                                                           '2016',
+                                                                                                         'Employment Duration': '6 '
+                                                                                                                                'mos',
+                                                                                                         'Location': 'Israël'}},
+                                                                          {'Intern Data Analysis & IT': {'Company Name': 'LIS '
+                                                                                                                         '| '
+                                                                                                                         'Logistics '
+                                                                                                                         'International '
+                                                                                                                         'Service '
+                                                                                                                         '(China)',
+                                                                                                         'Dates Employed': 'Sep '
+                                                                                                                           '2015 '
+                                                                                                                           '– '
+                                                                                                                           'Mar '
+                                                                                                                           '2016',
+                                                                                                         'Employment Duration': '7 '
+                                                                                                                                'mos',
+                                                                                                         'Location': 'Shanghai '
+                                                                                                                     'City, '
+                                                                                                                     'China'}}],
+                                                                 'Number of Entries': 6},
+                                                  'Skills': {}}}~module:linkedin_base~function:linkedin_base

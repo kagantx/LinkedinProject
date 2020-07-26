@@ -35,7 +35,6 @@ class LinkedinDatabase:
 
             self.cur.execute(CREATE_EXPERIENCES_TABLE)
 
-
             self.con.commit()
             logger.info(f"Created database : {self.database_file}  successfully")
 
@@ -55,7 +54,7 @@ class LinkedinDatabase:
     def insert_experience(self, dic_scrap_profile):
         """Insert experiments"""
         for url in dic_scrap_profile:
-            for experience in dic_scrap_profile[url]['Experience']['Data']:
+            for experience in dic_scrap_profile[url][EXPERIENCE][DATA]:
 
                 job_name = 'Nan'
                 company_name = 'Nan'
@@ -69,50 +68,46 @@ class LinkedinDatabase:
                     pass
 
                 try:
-                    company_name = experience[job_name]['Company Name']
+                    company_name = experience[job_name][COMPANY_NAME]
                 except:
                     pass
 
                 try:
-                    location = experience[job_name]['Location']
+                    location = experience[job_name][LOCATION]
                 except:
                     pass
 
                 try:
-                    duration = experience[job_name]['Employment Duration']
+                    duration = experience[job_name][EMPLOYMENT_DURATION]
                 except:
                     pass
 
                 try:
-                    start_date = experience[job_name]['Dates Employed']
+                    start_date = experience[job_name][DATES_EMPLOYED]
 
                 except:
                     pass
 
-                if job_name in ['Title', 'Company Name']:
+                if job_name in [TITLE, COMPANY_NAME]:
                     job_name = 'Nan'
 
-                self.cur.execute(''' INSERT OR IGNORE INTO companies(name) VALUES(?)''', [company_name])
+                self.cur.execute(INSERT_COMPANIES_NAME, [company_name])
 
-                self.cur.execute('''SELECT id FROM companies WHERE name=(?)''', [company_name])
+                self.cur.execute(SELECT_ID_COMPANY, [company_name])
 
                 id_company = self.cur.fetchone()[0]
 
-                self.cur.execute(
-                    ''' INSERT OR IGNORE INTO experiences(url, id_company, job_name, start_date, duration, location)\
-                     VALUES(?,?,?,?,?,?)''',
-                    [url, id_company, job_name, start_date, duration, location])
+                self.cur.execute(INSERT_EXPERIENCES, [url, id_company, job_name, start_date, duration, location])
 
-            self.cur.execute(''' INSERT OR IGNORE INTO profiles(url,search_job,search_location) VALUES(?,?,?)''',
-                             [url, self.job, self.location])
+            self.cur.execute(INSERT_PROFILES, [url, self.job, self.location])
         self.con.commit()
 
-    def insert_education(self, dic_scrap_profile,api_result):
+    def insert_education(self, dic_scrap_profile, api_result):
 
         """Education"""
 
         for url in dic_scrap_profile:
-            for education in dic_scrap_profile[url]['Education']['Data']:
+            for education in dic_scrap_profile[url][EDUCATION][DATA]:
                 institution = 'Nan'
                 Degree_Name = 'Nan'
                 Field_Of_Study = 'Nan'
@@ -123,47 +118,46 @@ class LinkedinDatabase:
                     pass
 
                 try:
-                    Degree_Name = education[institution]['Degree Name']
+                    Degree_Name = education[institution][DEGREE_NAME]
                 except:
                     pass
 
                 try:
-                    Field_Of_Study = education[institution]['Field Of Study']
+                    Field_Of_Study = education[institution][FIELD_OF_STUDY]
                 except:
                     pass
 
                 try:
-                    Dates = education[institution]['Dates attended or expected graduation']
+                    Dates = education[institution][DATES_ATTENDED]
                 except:
                     pass
                 if institution in api_result:
-                    formal_name = api_result[institution]['name']
-                    alpha_code = api_result[institution]['alpha_two_code']
-                    domain = api_result[institution]['domains'][0]
-                    country = api_result[institution]['country']
-                    web_page = api_result[institution]['web_pages'][0]
-                    self.cur.execute(''' INSERT OR IGNORE INTO institutions(name,formal_name,country, web_page, domain,country_code) VALUES(?,?,?,?,?,?) ''',[institution,formal_name,country,web_page,domain,alpha_code])
+                    formal_name = api_result[institution][NAME]
+                    alpha_code = api_result[institution][ALPHA_CODE]
+                    domain = api_result[institution][DOMAINS][0]
+                    country = api_result[institution][COUNTRY]
+                    web_page = api_result[institution][WEB_PAGES][0]
+                    self.cur.execute(INSERT_INSTITUTIONS,
+                                     [institution, formal_name, country, web_page, domain, alpha_code])
                 else:
-                    self.cur.execute(''' INSERT OR IGNORE INTO institutions(name) VALUES(?)''', [institution])
+                    self.cur.execute(INSERT_INSTITUTIONS_NAME, [institution])
 
-                self.cur.execute('''SELECT id FROM institutions WHERE name=(?)''', [institution])
+                self.cur.execute(SELECT_ID_INSTITUTIONS, [institution])
                 id_institution = self.cur.fetchone()[0]
 
-                self.cur.execute(''' INSERT OR IGNORE INTO subjects(name) VALUES(?)''', [Field_Of_Study])
+                self.cur.execute(INSERT_SUBJECTS, [Field_Of_Study])
 
-                self.cur.execute('''SELECT id FROM subjects WHERE name=(?)''', [Field_Of_Study])
+                self.cur.execute(SELECT_ID_SUBJECTS, [Field_Of_Study])
                 id_subject = self.cur.fetchone()[0]
 
-                self.cur.execute(
-                    ''' INSERT OR IGNORE INTO educations(url, graduation_type, id_institution, id_subject, date ) VALUES(?,?,?,?,?)''', \
-                    [url, Degree_Name, id_institution, id_subject, Dates])
+                self.cur.execute(INSERT_EDUCATIONS, [url, Degree_Name, id_institution, id_subject, Dates])
 
         self.con.commit()
 
     def insert_skills(self, dic_scrap_profile):
         """Skills"""
         for url in dic_scrap_profile:
-            for skill in dic_scrap_profile[url]['Skills']['Data']:
+            for skill in dic_scrap_profile[url][SKILLS][DATA]:
                 skill_name = 'Nan'
                 skill_level = 'Nan'
 
@@ -177,17 +171,14 @@ class LinkedinDatabase:
                 except:
                     pass
 
-                self.cur.execute(''' INSERT OR IGNORE INTO skill_list(name) VALUES(?)''', [skill_name])
+                self.cur.execute(INSERT_SKILLS_NAME, [skill_name])
 
-                self.cur.execute('''SELECT id FROM skill_list WHERE name=(?)''', [skill_name])
+                self.cur.execute(SELECT_ID_SKILLS, [skill_name])
 
                 id_skill = self.cur.fetchone()[0]
 
-                self.cur.execute(''' INSERT OR IGNORE INTO skills(url,id_skill,n_endorsements) VALUES(?,?,?)''', \
-                                 [url, id_skill, skill_level])
+                self.cur.execute(INSERT_SKILLS, [url, id_skill, skill_level])
         self.con.commit()
-
-
 
     def close(self):
 

@@ -1,22 +1,21 @@
 """Constants file. Options that are likely to be changed are on top
  At the bottom, a template is given for adding new sections"""
 
-DEFAULT_PICKLE_FILENAME="profile_pickle"
+DEFAULT_PICKLE_FILENAME = "profile_pickle"
 
-NUM_SCROLL_POSITIONS=8
+NUM_SCROLL_POSITIONS = 8
 
 SCROLL_PAUSE_TIME = 0.2
-CLICK_WAIT_TIME=0.5
+CLICK_WAIT_TIME = 0.5
 
-DEFAULT_JOB='Data Scientist'
-DEFAULT_LOCATION='Tel Aviv'
-DEFAULT_PAGES_TO_SCRAPE=1
+DEFAULT_JOB = 'Data Scientist'
+DEFAULT_LOCATION = 'Tel Aviv'
+DEFAULT_PAGES_TO_SCRAPE = 1
 
-#API constants
+# API constants
 API_URL = "http://universities.hipolabs.com/search?name={}"
 
 API_KEYS = {'name', 'state-province', 'country', 'domains', 'alpha_two_code', 'web_pages'}
-
 
 NO_DATA_RETURNED = "Did not successfuly get any University data from the API"
 
@@ -25,18 +24,17 @@ BAD_DATA_FOR_UNIVERSITY = "Found invalid data for university {}"
 NO_DATA_FOR_UNIVERSITY = "Found no data for university {}"
 
 UNIVERSITY_API_ERROR = "Unable to reach API for university data for university {}. Got Exception {}"
-#constants for setting fields in scrape_page.py
+# constants for setting fields in scrape_page.py
 EXPERIENCE_FIELDS = {'Company Name', 'Dates Employed', 'Employment Duration', 'Location'}
 EDUCATION_FIELDS = {'Degree Name', 'Field Of Study', "Dates attended or expected graduation"}
 FIELDS = EXPERIENCE_FIELDS.union(EDUCATION_FIELDS)
 
-DICTIONARY_SECTIONS={"Experience", "Education"}
-SKIP_ONE_SECTIONS={"Skills"}
+DICTIONARY_SECTIONS = {"Experience", "Education"}
+SKIP_ONE_SECTIONS = {"Skills"}
 
-#constants for finding sections in scrape_page.py
+# constants for finding sections in scrape_page.py
 LOCS = {}
 XPATHS = {}
-
 
 # XPATH locations for each section (loc) and its fields (xpath)
 LOCS["Experience"] = '//*[@id = "experience-section"]'
@@ -47,41 +45,41 @@ XPATHS["Experience"] = ''.join([LOCS["Experience"], r"//ul//li"])
 XPATHS["Education"] = ''.join([LOCS["Education"], r"//ul//li"])
 XPATHS["Skills"] = ''.join([LOCS["Skills"], r"//li"])
 
-FAILED_SECTION_SCRAPE="Failed to parse section: {}.\n Got Error: {}"
+FAILED_SECTION_SCRAPE = "Failed to parse section: {}.\n Got Error: {}"
 
-SCROLL_COMMAND="window.scrollTo(0, document.body.scrollHeight*{});"
+SCROLL_COMMAND = "window.scrollTo(0, document.body.scrollHeight*{});"
 
-#Constants for login in linkedin_base
+# Constants for login in linkedin_base
 
-ASK_LOGIN_XPATH='/html/body/nav/a[3]'
-USER_NAME_XPATH='//*[@id="username"]'
-PASSWORD_XPATH='//*[@id="password"]'
-LOGIN_BUTTON_XPATH='//*[@id="app__container"]/main/div[2]/form/div[3]/button'
-PAGE_SCRAPE_FAILED_ERROR="Completely failed to scrape profile {}. Got exception {}"
+ASK_LOGIN_XPATH = '/html/body/nav/a[3]'
+USER_NAME_XPATH = '//*[@id="username"]'
+PASSWORD_XPATH = '//*[@id="password"]'
+LOGIN_BUTTON_XPATH = '//*[@id="app__container"]/main/div[2]/form/div[3]/button'
+PAGE_SCRAPE_FAILED_ERROR = "Completely failed to scrape profile {}. Got exception {}"
 
-#Constants for searching in linkedin_base
+# Constants for searching in linkedin_base
 GOOGLE_URL = 'https://www.google.com/'
 GOOGLE_SEARCH_BAR_XPATH = '//*[@id="tsf"]/div[2]/div[1]/div[1]/div/div[2]/input'
 GOOGLE_NEXT_PAGE = '//*[@id="pnnext"]/span[2]'
 
 LINKEDIN_PREFIX = "https://www.linkedin.com/in/"
-GOOGLE_SEARCH_STRING="site:linkedin.com/in/ AND {} AND {}"
-NUM_PROFILES_FOUND="Found {} profiles to scrape"
-CORRECT_GOOGLE_RESULT_ID='eipWBe'
-LINKEDIN_MAIN_URL='https://www.linkedin.com/'
-URL_START_INDEX=2
-URL_END_INDEX=-3
+GOOGLE_SEARCH_STRING = "site:linkedin.com/in/ AND {} AND {}"
+NUM_PROFILES_FOUND = "Found {} profiles to scrape"
+CORRECT_GOOGLE_RESULT_ID = 'eipWBe'
+LINKEDIN_MAIN_URL = 'https://www.linkedin.com/'
+URL_START_INDEX = 2
+URL_END_INDEX = -3
 
 SEARCHED_GOOGLE = "Searched google for your search terms {} and {}"
-NO_MORE_PROFILES_MESSAGE='Unable to search for any more profiles'
+NO_MORE_PROFILES_MESSAGE = 'Unable to search for any more profiles'
 SUCCESSFULLY_LOGGED_IN = "Successfully logged in"
 SUCCESSFUL_SCRAPES_DONE = "Successfully scraped {} profiles"
-#Constants on top level linkedin_scraper
+# Constants on top level linkedin_scraper
 
-NO_PAGES_REQUESTED="You must ask to scrape at least one page"
-INVALID_SECTION_REQUESTED="You asked us to scrape a section we cannot scrape. Your input was: {}"
-SECTION_DICT={'x':"Experience",'e':'Education','s':'Skills'}
-SECTIONS_LOC=["E(x)perience","(E)ducation","(S)kills"]
+NO_PAGES_REQUESTED = "You must ask to scrape at least one page"
+INVALID_SECTION_REQUESTED = "You asked us to scrape a section we cannot scrape. Your input was: {}"
+SECTION_DICT = {'x': "Experience", 'e': 'Education', 's': 'Skills'}
+SECTIONS_LOC = ["E(x)perience", "(E)ducation", "(S)kills"]
 SECTION_LETTERS_DEFAULT = 'xes'
 SECTIONS_HELP = f"""Sections to scrape. Please use single letters for 
                 {SECTIONS_LOC[0]}, {SECTIONS_LOC[1]}, {SECTIONS_LOC[2]} 
@@ -166,6 +164,39 @@ CREATE_PROFILES_TABLE = ''' CREATE TABLE `profiles` (
 
                         '''
 
+EXPERIENCE = 'Experience'
+DATA = 'Data'
+COMPANY_NAME = 'Company Name'
+LOCATION = 'Location'
+EMPLOYMENT_DURATION = 'Employment Duration'
+DATES_EMPLOYED = 'Dates Employed'
+TITLE = 'Title'
+EDUCATION = 'Education'
+DEGREE_NAME = 'Degree Name'
+FIELD_OF_STUDY = 'Field Of Study'
+DATES_ATTENDED = 'Dates attended or expected graduation'
+NAME = 'name'
+ALPHA_CODE = 'alpha_two_code'
+DOMAINS = 'domains'
+COUNTRY = 'country'
+WEB_PAGES = 'web_pages'
+SKILLS = 'Skills'
+
+INSERT_COMPANIES_NAME = ''' INSERT OR IGNORE INTO companies(name) VALUES(?)'''
+SELECT_ID_COMPANY = '''SELECT id FROM companies WHERE name=(?)'''
+INSERT_EXPERIENCES = ''' INSERT OR IGNORE INTO experiences(url, id_company, job_name, start_date, duration, location)\
+                     VALUES(?,?,?,?,?,?)'''
+INSERT_PROFILES = ''' INSERT OR IGNORE INTO profiles(url,search_job,search_location) VALUES(?,?,?)'''
+INSERT_INSTITUTIONS = ''' INSERT OR IGNORE INTO institutions(name,formal_name,country, web_page, domain,country_code) VALUES(?,?,?,?,?,?) '''
+INSERT_INSTITUTIONS_NAME = ''' INSERT OR IGNORE INTO institutions(name) VALUES(?)'''
+SELECT_ID_INSTITUTIONS = '''SELECT id FROM institutions WHERE name=(?)'''
+INSERT_SUBJECTS = ''' INSERT OR IGNORE INTO subjects(name) VALUES(?)'''
+SELECT_ID_SUBJECTS = '''SELECT id FROM subjects WHERE name=(?)'''
+INSERT_EDUCATIONS = ''' INSERT OR IGNORE INTO educations(url, graduation_type, id_institution, id_subject, date ) VALUES(?,?,?,?,?)'''
+INSERT_SKILLS_NAME = ''' INSERT OR IGNORE INTO skill_list(name) VALUES(?)'''
+SELECT_ID_SKILLS = '''SELECT id FROM skill_list WHERE name=(?)'''
+INSERT_SKILLS = ''' INSERT OR IGNORE INTO skills(url,id_skill,n_endorsements) VALUES(?,?,?)'''
+
 # Template for adding sections
 #
 # FOO_FIELDS = {foo_field1, ...}
@@ -174,18 +205,12 @@ CREATE_PROFILES_TABLE = ''' CREATE TABLE `profiles` (
 # LOCS.update({foo_name: foo_loc})
 # XPATHS.update({foo_name:foo_loc+foo_xpath_extra})
 # add to SKIP_ONE_SECTIONS or DICTIONARY_SECTIONS if it has the same
-#format as one of them. Otherwise, need to modify scrape_page.py
-
+# format as one of them. Otherwise, need to modify scrape_page.py
 
 
 # database
 
 DEFAULT_DB_FILENAME = 'linkedin.db'
 
-
-
-
-if __name__=="__main__":
-
-
+if __name__ == "__main__":
     print("All tests passed")

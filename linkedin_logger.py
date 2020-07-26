@@ -1,7 +1,8 @@
 import logging
 
+
 def getmylogger(name):
-    #With help from codemotionhttps://www.codemotion.com/magazine/dev-hub/big-data-analyst/logging-in-python-a-broad-gentle-introduction/
+    # With help from codemotionhttps://www.codemotion.com/magazine/dev-hub/big-data-analyst/logging-in-python-a-broad-gentle-introduction/
     file_formatter = logging.Formatter('%(asctime)s~%(levelname)s~%(message)s~module:%(module)s~function:%(module)s')
     console_formatter = logging.Formatter('%(levelname)s -- %(message)s')
 
@@ -20,12 +21,5 @@ def getmylogger(name):
     return logger
 
 
-
-
-
-
-if __name__=="__main__":
-
-
-
+if __name__ == "__main__":
     print("All tests passed")

@@ -12,6 +12,19 @@ DEFAULT_JOB='Data Scientist'
 DEFAULT_LOCATION='Tel Aviv'
 DEFAULT_PAGES_TO_SCRAPE=1
 
+#API constants
+API_URL = "http://universities.hipolabs.com/search?name={}"
+
+API_KEYS = {'name', 'state-province', 'country', 'domains', 'alpha_two_code', 'web_pages'}
+
+
+NO_DATA_RETURNED = "Did not successfuly get any University data from the API"
+
+BAD_DATA_FOR_UNIVERSITY = "Found invalid data for university {}"
+
+NO_DATA_FOR_UNIVERSITY = "Found no data for university {}"
+
+UNIVERSITY_API_ERROR = "Unable to reach API for university data for university {}. Got Exception {}"
 #constants for setting fields in scrape_page.py
 EXPERIENCE_FIELDS = {'Company Name', 'Dates Employed', 'Employment Duration', 'Location'}
 EDUCATION_FIELDS = {'Degree Name', 'Field Of Study', "Dates attended or expected graduation"}
@@ -136,8 +149,12 @@ CREATE_SUBJECTS_TABLE = ''' CREATE TABLE `subjects` (
 
 CREATE_INSTITUTION_TABLE = ''' CREATE TABLE `institutions` (
                           `id` integer PRIMARY KEY AUTOINCREMENT,
-                          `name` varchar(255) UNIQUE
-
+                          `name` varchar(255) UNIQUE,
+                          'formal_name' varchar(255), 
+                          'country' varchar(255),
+                          'web_page' varchar(255),
+                          'domain' varchar(255),
+                          'country_code' varchar(2)
                         );
 
                         '''

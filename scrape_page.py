@@ -8,6 +8,7 @@ from linkedin_logger import getmylogger
 
 logger = getmylogger(__name__)
 
+
 class WebPage:
     """Represents a LinkedIn webpage.
 
@@ -53,14 +54,14 @@ class WebPage:
 
         self.driver.get(self.url)
         self._scroll_page()
-        failures=0
+        failures = 0
         for section in self.sections:
             try:
-                 section_data = self._get_section(section)
+                section_data = self._get_section(section)
             except Exception as ex:
                 logger.error(FAILED_SECTION_SCRAPE.format(section, ex))
                 self.scraped_data[self.url].update({section: {}})
-                failures+=1
+                failures += 1
             else:
                 self.scraped_data[self.url].update({section: section_data})
         if failures == len(self.sections):
@@ -69,7 +70,7 @@ class WebPage:
     def _scroll_page(self):
         """Scrolls through the web page to ensure that all elements of the page can be loaded"""
         for location in range(NUM_SCROLL_POSITIONS):
-            self.driver.execute_script(SCROLL_COMMAND.format(location/NUM_SCROLL_POSITIONS))
+            self.driver.execute_script(SCROLL_COMMAND.format(location / NUM_SCROLL_POSITIONS))
             sleep(SCROLL_PAUSE_TIME)
 
     def _get_section(self, section):

@@ -17,13 +17,19 @@ API_URL = "http://universities.hipolabs.com/search?name={}"
 
 API_KEYS = {'name', 'state-province', 'country', 'domains', 'alpha_two_code', 'web_pages'}
 
-NO_DATA_RETURNED = "Did not successfuly get any University data from the API"
+NO_DATA_RETURNED = "Did not successfull get any University data from the API"
 
 BAD_DATA_FOR_UNIVERSITY = "Found invalid data for university {}"
 
 NO_DATA_FOR_UNIVERSITY = "Found no data for university {}"
 
 UNIVERSITY_API_ERROR = "Unable to reach API for university data for university {}. Got Exception {}"
+
+PAGE_DATA_ADDED_DB = "Added data to database for url {}"
+
+FAILED_SECTION_INSERT = "Failed to add part of profile to database: got error: {}"
+
+API_GOT_ERROR = "Got error when scraping API data; got error: {}"
 # constants for setting fields in scrape_page.py
 EXPERIENCE_FIELDS = {'Company Name', 'Dates Employed', 'Employment Duration', 'Location'}
 EDUCATION_FIELDS = {'Degree Name', 'Field Of Study', "Dates attended or expected graduation"}
@@ -65,8 +71,11 @@ GOOGLE_NEXT_PAGE = '//*[@id="pnnext"]/span[2]'
 LINKEDIN_PREFIX = "https://www.linkedin.com/in/"
 GOOGLE_SEARCH_STRING = "site:linkedin.com/in/ AND {} AND {}"
 NUM_PROFILES_FOUND = "Found {} profiles to scrape"
+NUM_NEW_PROFILES_FOUND = "Found {} new profiles to scrape"
 CORRECT_GOOGLE_RESULT_ID = 'eipWBe'
 LINKEDIN_MAIN_URL = 'https://www.linkedin.com/'
+
+PROFILE_SCRAPING_MESSAGE = 'Scraping profile at url {}'
 URL_START_INDEX = 2
 URL_END_INDEX = -3
 
@@ -84,6 +93,20 @@ SECTION_LETTERS_DEFAULT = 'xes'
 SECTIONS_HELP = f"""Sections to scrape. Please use single letters for 
                 {SECTIONS_LOC[0]}, {SECTIONS_LOC[1]}, {SECTIONS_LOC[2]} 
                     without spaces in any order"""
+
+#Constants for database module
+
+REMOVED_DATABASE_SUCCESS = "Removed the database : {} successfully"
+
+NO_DATABASE_TO_REMOVE = "Didn't find a database to remove: {}"
+
+DATABASE_EXISTS = "The database {} already exists. Opening ..."
+
+OPENED_DATABASE_FILE = "Opened database file"
+
+DATABASE_CREATION_SUCCESS = "Created database {} successfully"
+
+#SQL Queries
 
 CREATE_EXPERIENCES_TABLE = ''' CREATE TABLE `experiences` (
                           `id` INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -164,6 +187,32 @@ CREATE_PROFILES_TABLE = ''' CREATE TABLE `profiles` (
 
                         '''
 
+CREATE_TABLE_LIST = [CREATE_PROFILES_TABLE, CREATE_INSTITUTION_TABLE, CREATE_SUBJECTS_TABLE,
+                     CREATE_SKILL_LIST_TABLE, CREATE_COMPANIES_TABLE, CREATE_EDUCATIONS_TABLE, CREATE_SKILLS_TABLE,
+                     CREATE_EXPERIENCES_TABLE]
+
+
+SELECT_OLD_URLS = '''SELECT url FROM profiles'''
+
+INSERT_COMPANIES_NAME = ''' INSERT OR IGNORE INTO companies(name) VALUES(?)'''
+SELECT_ID_COMPANY = '''SELECT id FROM companies WHERE name=(?)'''
+INSERT_EXPERIENCES = ''' INSERT OR IGNORE INTO experiences(url, id_company, job_name, start_date, duration, location)\
+                     VALUES(?,?,?,?,?,?)'''
+INSERT_PROFILES = ''' INSERT OR IGNORE INTO profiles(url,search_job,search_location) VALUES(?,?,?)'''
+INSERT_INSTITUTIONS = """ INSERT OR IGNORE INTO institutions(name,formal_name,country, web_page,
+                        domain,country_code) VALUES(?,?,?,?,?,?) """
+INSERT_INSTITUTIONS_NAME = ''' INSERT OR IGNORE INTO institutions(name) VALUES(?)'''
+SELECT_ID_INSTITUTIONS = '''SELECT id FROM institutions WHERE name=(?)'''
+INSERT_SUBJECTS = ''' INSERT OR IGNORE INTO subjects(name) VALUES(?)'''
+SELECT_ID_SUBJECTS = '''SELECT id FROM subjects WHERE name=(?)'''
+INSERT_EDUCATIONS = """ INSERT OR IGNORE INTO educations(url, graduation_type, id_institution, id_subject, date ) 
+                            VALUES(?,?,?,?,?)"""
+INSERT_SKILLS_NAME = ''' INSERT OR IGNORE INTO skill_list(name) VALUES(?)'''
+SELECT_ID_SKILLS = '''SELECT id FROM skill_list WHERE name=(?)'''
+INSERT_SKILLS = ''' INSERT OR IGNORE INTO skills(url,id_skill,n_endorsements) VALUES(?,?,?)'''
+
+#SQL field names
+
 EXPERIENCE = 'Experience'
 DATA = 'Data'
 COMPANY_NAME = 'Company Name'
@@ -181,22 +230,6 @@ DOMAINS = 'domains'
 COUNTRY = 'country'
 WEB_PAGES = 'web_pages'
 SKILLS = 'Skills'
-
-INSERT_COMPANIES_NAME = ''' INSERT OR IGNORE INTO companies(name) VALUES(?)'''
-SELECT_ID_COMPANY = '''SELECT id FROM companies WHERE name=(?)'''
-INSERT_EXPERIENCES = ''' INSERT OR IGNORE INTO experiences(url, id_company, job_name, start_date, duration, location)\
-                     VALUES(?,?,?,?,?,?)'''
-INSERT_PROFILES = ''' INSERT OR IGNORE INTO profiles(url,search_job,search_location) VALUES(?,?,?)'''
-INSERT_INSTITUTIONS = ''' INSERT OR IGNORE INTO institutions(name,formal_name,country, web_page, domain,country_code) VALUES(?,?,?,?,?,?) '''
-INSERT_INSTITUTIONS_NAME = ''' INSERT OR IGNORE INTO institutions(name) VALUES(?)'''
-SELECT_ID_INSTITUTIONS = '''SELECT id FROM institutions WHERE name=(?)'''
-INSERT_SUBJECTS = ''' INSERT OR IGNORE INTO subjects(name) VALUES(?)'''
-SELECT_ID_SUBJECTS = '''SELECT id FROM subjects WHERE name=(?)'''
-INSERT_EDUCATIONS = ''' INSERT OR IGNORE INTO educations(url, graduation_type, id_institution, id_subject, date ) VALUES(?,?,?,?,?)'''
-INSERT_SKILLS_NAME = ''' INSERT OR IGNORE INTO skill_list(name) VALUES(?)'''
-SELECT_ID_SKILLS = '''SELECT id FROM skill_list WHERE name=(?)'''
-INSERT_SKILLS = ''' INSERT OR IGNORE INTO skills(url,id_skill,n_endorsements) VALUES(?,?,?)'''
-
 # Template for adding sections
 #
 # FOO_FIELDS = {foo_field1, ...}

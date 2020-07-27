@@ -4,7 +4,6 @@ from selenium.webdriver.common.keys import Keys
 from scrape_page import WebPage
 import pickle
 import pprint
-from linkedin_database import LinkedinDatabase
 from university_api import UniversityAPI
 from constants import *
 
@@ -20,6 +19,8 @@ class LinkedinBot:
             __init__ to set variables and validate the user's choice of job and location to scrape
             login function to connect on Linkedin web site
             get_profile_urls function to find every valid url profile
+            scrape_content_profiles to scrape data from those urls
+            export_scrapes function to dump scrape data to the logger
             save_result function to dump the scrape data to a pickle file
             load_result function to load the scrape data to a pickle file
 
@@ -116,9 +117,15 @@ class LinkedinBot:
         # Get the list of all the LinkedIn profiles
         list_of_urls = self.url_dic.keys()
         logger.info(NUM_PROFILES_FOUND.format(len(list_of_urls)))
+
+        # Don't scrape urls that are already in the database
+        if len(self.db_bot.old_urls) > 0:
+            list_of_urls = [url for url in list_of_urls if url not in self.db_bot.old_urls]
+            logger.info(NUM_NEW_PROFILES_FOUND.format(len(list_of_urls)))
         # Loop over all urls to scrape data on it using the class WebPage from scrape_page.py
         successful_scrapes = 0
         for url_profile in list_of_urls:
+            logger.info(PROFILE_SCRAPING_MESSAGE.format(url_profile))
             try:
                 sleep(CLICK_WAIT_TIME)
                 this_url = WebPage(url_profile, self.driver, self.sections)
@@ -137,18 +144,28 @@ class LinkedinBot:
                     api_result = self.api.return_api_data()
 
             except Exception as ex:
-                logger.error("Got error when scraping API data; got error: {}".format(ex))
+                logger.error(API_GOT_ERROR.format(ex))
             try:
 
                 self.db_bot.insert_experience(dic_scrap_profile=this_url.export_data())
                 self.db_bot.insert_education(dic_scrap_profile=this_url.export_data(), api_result=api_result)
                 self.db_bot.insert_skills(dic_scrap_profile=this_url.export_data())
             except Exception as ex:
-                logger.error("Failed to add part of profile to database: got error: {}".format(ex))
-
+                logger.error(FAILED_SECTION_INSERT.format(ex))
+            else:
+                logger.debug(PAGE_DATA_ADDED_DB.format(url_profile))
         logger.info(SUCCESSFUL_SCRAPES_DONE.format(successful_scrapes))
         self.driver.close()
         self.db_bot.close()
+
+    def export_scrapes(self):
+        """Exports the final dictionary and the data from the API to the logger"""
+        my_dict = self.scraped_page_data
+        api_data = self.api.extract_api_data()
+        linkedin_print = pprint.pformat(my_dict)
+        logger.debug(linkedin_print)
+        api_print = pprint.pformat(api_data)
+        logger.debug(api_print)
 
     def save_result(self):
         """The function saves our result in a pickle file"""

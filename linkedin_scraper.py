@@ -35,10 +35,11 @@ logger = getmylogger(__name__)
               type=click.IntRange(1, None), show_default=True)
 @click.option('--db_filename', '-d', help='Name of database file',
               default=DEFAULT_DB_FILENAME, show_default=True)
+@click.option('--new_db/--keep_db', help='Whether to overwrite the database', default=False)
 @click.option('--sections', '-s',
               help=SECTIONS_HELP,
               default=SECTION_LETTERS_DEFAULT)
-def main(email, password, job, location, nb_pages, db_filename, sections):
+def main(email, password, job, location, nb_pages, db_filename, sections, new_db):
     """Sanitizes inputs and then calls the Parser if input is OK"""
     section_set = set([character for character in sections])
     if not section_set.issubset(SECTION_DICT.keys()):
@@ -50,18 +51,14 @@ def main(email, password, job, location, nb_pages, db_filename, sections):
 
     bot = LinkedinBot(email, password, job=job, location=location, nb_pages=nb_pages, sections=sections,
                       database=db_bot)
-
-    db_bot.remove_db()
-    db_bot.remove_db()
-    db_bot.create_db()
+    if new_db:
+        db_bot.remove_db()
     db_bot.create_db()
 
     bot.login()
     bot.get_profile_urls()
     bot.scrape_content_profiles()
-    bot.save_result()
-    bot.load_result()
-
+    bot.export_scrapes()
     # db_bot.insert_data()
 
 

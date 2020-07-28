@@ -1,8 +1,8 @@
 from constants import *
 import os
 import sqlite3
-import pickle
 from linkedin_logger import getmylogger
+import pymysql.cursors
 
 logger = getmylogger(__name__)
 
@@ -28,8 +28,18 @@ class LinkedinDatabase:
     def create_db(self):
         """The function will create the database or open it"""
         if not os.path.exists(self.database_file):
-            self.con = sqlite3.connect(self.database_file)
+            # self.con = sqlite3.connect(self.database_file)
+            self.con = pymysql.connect(host='localhost',
+                                         user='root',
+                                         password='eaubonne95',
+                                         db='linkedin',
+                                         charset='utf8mb4',
+                                         cursorclass=pymysql.cursors.DictCursor)
+
             self.cur = self.con.cursor()
+            self.cur.execute(CREATE_DB_IF_NOT_EXIST)
+            self.cur.execute(USE_DB)
+
             for table_statement in CREATE_TABLE_LIST:
                 self.cur.execute(table_statement)
 
@@ -38,7 +48,13 @@ class LinkedinDatabase:
 
         else:
             logger.info(DATABASE_EXISTS.format(self.database_file))
-            self.con = sqlite3.connect(self.database_file)
+            # self.con = sqlite3.connect(self.database_file)
+            self.con = pymysql.connect(host='localhost',
+                                       user='root',
+                                       password='eaubonne95',
+                                       db='linkedin',
+                                       charset='utf8mb4',
+                                       cursorclass=pymysql.cursors.DictCursor)
             self.cur = self.con.cursor()
             # Get list of urls that are already in the database
             self.cur.execute(SELECT_OLD_URLS)

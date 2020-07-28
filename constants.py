@@ -94,7 +94,7 @@ SECTIONS_HELP = f"""Sections to scrape. Please use single letters for
                 {SECTIONS_LOC[0]}, {SECTIONS_LOC[1]}, {SECTIONS_LOC[2]} 
                     without spaces in any order"""
 
-#Constants for database module
+# Constants for database module
 
 REMOVED_DATABASE_SUCCESS = "Removed the database : {} successfully"
 
@@ -106,10 +106,12 @@ OPENED_DATABASE_FILE = "Opened database file"
 
 DATABASE_CREATION_SUCCESS = "Created database {} successfully"
 
-#SQL Queries
+# SQL Queries
 
+CREATE_DB_IF_NOT_EXIST = "CREATE DATABASE IF NOT EXISTS linkedin"
+USE_DB = "USE linkedin"
 CREATE_EXPERIENCES_TABLE = ''' CREATE TABLE `experiences` (
-                          `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+                          `id` INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
                           `url` varchar(255),
                           `id_company` integer,
                           `job_name` varchar(255),
@@ -123,7 +125,7 @@ CREATE_EXPERIENCES_TABLE = ''' CREATE TABLE `experiences` (
                         '''
 
 CREATE_SKILLS_TABLE = ''' CREATE TABLE `skills` (
-                          `id` integer PRIMARY KEY AUTOINCREMENT,
+                          `id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
                           `url` varchar(255),
                           `id_skill` int,
                           `n_endorsements` int,
@@ -134,7 +136,7 @@ CREATE_SKILLS_TABLE = ''' CREATE TABLE `skills` (
                         '''
 
 CREATE_EDUCATIONS_TABLE = '''  CREATE TABLE `educations` (
-                          `id` integer PRIMARY KEY AUTOINCREMENT,
+                          `id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
                           `url` varchar(255),
                           `graduation_type` varchar(255),
                           `id_institution` integer,
@@ -148,28 +150,28 @@ CREATE_EDUCATIONS_TABLE = '''  CREATE TABLE `educations` (
                         '''
 
 CREATE_COMPANIES_TABLE = ''' CREATE TABLE `companies` (
-                          `id` integer PRIMARY KEY AUTOINCREMENT,
+                          `id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
                           `name` varchar(255) UNIQUE
                         );
 
                         '''
 
 CREATE_SKILL_LIST_TABLE = ''' CREATE TABLE `skill_list` (
-                          `id` integer PRIMARY KEY AUTOINCREMENT,
+                          `id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
                           `name` varchar(255) UNIQUE
                         );
 
                         '''
 
 CREATE_SUBJECTS_TABLE = ''' CREATE TABLE `subjects` (
-                          `id` integer PRIMARY KEY AUTOINCREMENT,
+                          `id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
                           `name` varchar(255) UNIQUE
                         );
 
                         '''
 
 CREATE_INSTITUTION_TABLE = ''' CREATE TABLE `institutions` (
-                          `id` integer PRIMARY KEY AUTOINCREMENT,
+                          `id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
                           `name` varchar(255) UNIQUE,
                           'formal_name' varchar(255), 
                           'country' varchar(255),
@@ -191,7 +193,6 @@ CREATE_TABLE_LIST = [CREATE_PROFILES_TABLE, CREATE_INSTITUTION_TABLE, CREATE_SUB
                      CREATE_SKILL_LIST_TABLE, CREATE_COMPANIES_TABLE, CREATE_EDUCATIONS_TABLE, CREATE_SKILLS_TABLE,
                      CREATE_EXPERIENCES_TABLE]
 
-
 SELECT_OLD_URLS = '''SELECT url FROM profiles'''
 
 INSERT_COMPANIES_NAME = ''' INSERT OR IGNORE INTO companies(name) VALUES(?)'''
@@ -211,7 +212,7 @@ INSERT_SKILLS_NAME = ''' INSERT OR IGNORE INTO skill_list(name) VALUES(?)'''
 SELECT_ID_SKILLS = '''SELECT id FROM skill_list WHERE name=(?)'''
 INSERT_SKILLS = ''' INSERT OR IGNORE INTO skills(url,id_skill,n_endorsements) VALUES(?,?,?)'''
 
-#SQL field names
+# SQL field names
 
 EXPERIENCE = 'Experience'
 DATA = 'Data'

@@ -1,6 +1,8 @@
 from selenium import webdriver
 from time import sleep
 from selenium.webdriver.common.keys import Keys
+
+from selenium.webdriver.chrome.options import Options
 from scrape_page import WebPage
 import pickle
 import pprint
@@ -40,7 +42,9 @@ class LinkedinBot:
             """
         self.email = email
         self.password = password
-        self.driver = webdriver.Chrome()
+        chrome_options=Options()
+        chrome_options.add_argument('--headless')
+        self.driver = webdriver.Chrome(chrome_options=chrome_options)
         # initialize data
         self.url_dic = {}
         self.scraped_page_data = {}

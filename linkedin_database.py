@@ -47,11 +47,26 @@ class LinkedinDatabase:
             self.con.commit()
             logger.info(DATABASE_CREATION_SUCCESS.format(self.database_file))
 
+            self.con = pymysql.connect(host='localhost',
+                                       user='root',
+                                       password='eaubonne95',
+                                       db=self.database_file,
+                                       charset='utf8mb4',
+                                       cursorclass=pymysql.cursors.DictCursor)
+            self.cur = self.con.cursor()
+
         else:
             logger.info(DATABASE_EXISTS.format(self.database_file))
             # self.con = sqlite3.connect(self.database_file)
 
             # Get list of urls that are already in the database
+            self.con = pymysql.connect(host='localhost',
+                                       user='root',
+                                       password='eaubonne95',
+                                       db=self.database_file,
+                                       charset='utf8mb4',
+                                       cursorclass=pymysql.cursors.DictCursor)
+            self.cur = self.con.cursor()
             self.cur.execute(USE_DB)
             self.cur.execute(SELECT_OLD_URLS)
             old_url_response = self.cur.fetchall()
@@ -69,9 +84,13 @@ class LinkedinDatabase:
     def insert_experience(self, dic_scrap_profile):
         """Inserts data into profiles,companies, and experience tables"""
         for url in dic_scrap_profile:
+            logger.info(f'IN {url}')
+            logger.info(f'{INSERT_PROFILES, [url, self.job, self.location]}')
+
             self.cur.execute(INSERT_PROFILES, [url, self.job, self.location])
 
             for experience in dic_scrap_profile[url][EXPERIENCE][DATA]:
+                logger.info('IN2')
 
                 job_name = 'Nan'
                 company_name = 'Nan'

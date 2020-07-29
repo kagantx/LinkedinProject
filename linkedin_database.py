@@ -1,6 +1,5 @@
 from constants import *
 import os
-import sqlite3
 from linkedin_logger import getmylogger
 import pymysql.cursors
 
@@ -24,19 +23,21 @@ class LinkedinDatabase:
         self.location = location
         self.database_file = database_file
         self.old_urls = []
+        self.db_list=[]
+
+        self.con = pymysql.connect(host='localhost',
+                                   user='root',
+                                   password='eaubonne95',
+                                   charset='utf8mb4',
+                                   cursorclass=pymysql.cursors.DictCursor)
+        self.cur = self.con.cursor()
 
     def create_db(self):
         """The function will create the database or open it"""
-        if not os.path.exists(self.database_file):
-            # self.con = sqlite3.connect(self.database_file)
-            self.con = pymysql.connect(host='localhost',
-                                         user='root',
-                                         password='eaubonne95',
-                                         db='linkedin',
-                                         charset='utf8mb4',
-                                         cursorclass=pymysql.cursors.DictCursor)
+        self.cur.execute("SHOW DATABASES;")
+        self.db_list = [dic['Database'] for dic in self.cur.fetchall()]
 
-            self.cur = self.con.cursor()
+        if self.database_file not in self.db_list:
             self.cur.execute(CREATE_DB_IF_NOT_EXIST)
             self.cur.execute(USE_DB)
 
@@ -49,14 +50,9 @@ class LinkedinDatabase:
         else:
             logger.info(DATABASE_EXISTS.format(self.database_file))
             # self.con = sqlite3.connect(self.database_file)
-            self.con = pymysql.connect(host='localhost',
-                                       user='root',
-                                       password='eaubonne95',
-                                       db='linkedin',
-                                       charset='utf8mb4',
-                                       cursorclass=pymysql.cursors.DictCursor)
-            self.cur = self.con.cursor()
+
             # Get list of urls that are already in the database
+            self.cur.execute(USE_DB)
             self.cur.execute(SELECT_OLD_URLS)
             old_url_response = self.cur.fetchall()
             self.old_urls = [value[0] for value in old_url_response]

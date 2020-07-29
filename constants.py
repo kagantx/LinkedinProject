@@ -173,11 +173,11 @@ CREATE_SUBJECTS_TABLE = ''' CREATE TABLE `subjects` (
 CREATE_INSTITUTION_TABLE = ''' CREATE TABLE `institutions` (
                           `id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
                           `name` varchar(255) UNIQUE,
-                          'formal_name' varchar(255), 
-                          'country' varchar(255),
-                          'web_page' varchar(255),
-                          'domain' varchar(255),
-                          'country_code' varchar(2)
+                          `formal_name` varchar(255), 
+                          `country` varchar(255),
+                          `web_page` varchar(255),
+                          `domain` varchar(255),
+                          `country_code` varchar(2)
                         );
 
                         '''
@@ -195,22 +195,22 @@ CREATE_TABLE_LIST = [CREATE_PROFILES_TABLE, CREATE_INSTITUTION_TABLE, CREATE_SUB
 
 SELECT_OLD_URLS = '''SELECT url FROM profiles'''
 
-INSERT_COMPANIES_NAME = ''' INSERT OR IGNORE INTO companies(name) VALUES(?)'''
-SELECT_ID_COMPANY = '''SELECT id FROM companies WHERE name=(?)'''
-INSERT_EXPERIENCES = ''' INSERT OR IGNORE INTO experiences(url, id_company, job_name, start_date, duration, location)\
-                     VALUES(?,?,?,?,?,?)'''
-INSERT_PROFILES = ''' INSERT OR IGNORE INTO profiles(url,search_job,search_location) VALUES(?,?,?)'''
-INSERT_INSTITUTIONS = """ INSERT OR IGNORE INTO institutions(name,formal_name,country, web_page,
-                        domain,country_code) VALUES(?,?,?,?,?,?) """
-INSERT_INSTITUTIONS_NAME = ''' INSERT OR IGNORE INTO institutions(name) VALUES(?)'''
-SELECT_ID_INSTITUTIONS = '''SELECT id FROM institutions WHERE name=(?)'''
-INSERT_SUBJECTS = ''' INSERT OR IGNORE INTO subjects(name) VALUES(?)'''
-SELECT_ID_SUBJECTS = '''SELECT id FROM subjects WHERE name=(?)'''
-INSERT_EDUCATIONS = """ INSERT OR IGNORE INTO educations(url, graduation_type, id_institution, id_subject, date ) 
-                            VALUES(?,?,?,?,?)"""
-INSERT_SKILLS_NAME = ''' INSERT OR IGNORE INTO skill_list(name) VALUES(?)'''
-SELECT_ID_SKILLS = '''SELECT id FROM skill_list WHERE name=(?)'''
-INSERT_SKILLS = ''' INSERT OR IGNORE INTO skills(url,id_skill,n_endorsements) VALUES(?,?,?)'''
+INSERT_COMPANIES_NAME = ''' INSERT  IGNORE INTO companies(name) VALUES(%s)'''
+SELECT_ID_COMPANY = '''SELECT id FROM companies WHERE name=%s'''
+INSERT_EXPERIENCES = ''' INSERT  IGNORE INTO experiences(url, id_company, job_name, start_date, duration, location)\
+                     VALUES(%s,%s,%s,%s,%s,%s)'''
+INSERT_PROFILES = ''' INSERT  IGNORE INTO profiles(url,search_job,search_location) VALUES(%s,%s,%s)'''
+INSERT_INSTITUTIONS = """ INSERT  IGNORE INTO institutions(name,formal_name,country, web_page,
+                        domain,country_code) VALUES(%s,%s,%s,%s,%s,%s) """
+INSERT_INSTITUTIONS_NAME = ''' INSERT  IGNORE INTO institutions(name) VALUES(%s)'''
+SELECT_ID_INSTITUTIONS = '''SELECT id FROM institutions WHERE name=%s'''
+INSERT_SUBJECTS = ''' INSERT  IGNORE INTO subjects(name) VALUES(%s)'''
+SELECT_ID_SUBJECTS = '''SELECT id FROM subjects WHERE name=%s'''
+INSERT_EDUCATIONS = """ INSERT  IGNORE INTO educations(url, graduation_type, id_institution, id_subject, date ) 
+                            VALUES(%s,%s,%s,%s,%s)"""
+INSERT_SKILLS_NAME = ''' INSERT  IGNORE INTO skill_list(name) VALUES(%s)'''
+SELECT_ID_SKILLS = '''SELECT id FROM skill_list WHERE name=%s'''
+INSERT_SKILLS = ''' INSERT  IGNORE INTO skills(url,id_skill,n_endorsements) VALUES(%s,%s,%s)'''
 
 # SQL field names
 
@@ -244,7 +244,7 @@ SKILLS = 'Skills'
 
 # database
 
-DEFAULT_DB_FILENAME = 'linkedin.db'
+DEFAULT_DB_FILENAME = 'linkedin'
 
 if __name__ == "__main__":
     print("All tests passed")
